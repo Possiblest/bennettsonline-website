@@ -333,6 +333,16 @@
   }
   .banner strong { color: var(--white); }
 
+  /* ── SWIPE HINT (mobile only) ── */
+  .s2-hint {
+    font-size:10px; color:var(--muted);
+    text-align:center; padding:.3rem 0 .5rem;
+    letter-spacing:.04em;
+  }
+  @media (max-width:600px) {
+    .s2-hint { display:block !important; }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     .fn-info { width: 140px; }
@@ -934,7 +944,10 @@
     <span class="leg-item"><span class="leg-dot" style="background:var(--tas)"></span><span class="leg-label">T&AS Designtech</span></span>
   </div>
 
-  <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden">
+  <div style="display:none" id="s2-hint" class="s2-hint">← swipe to see all entities →</div>
+
+  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--border)">
+  <div style="min-width:540px;overflow:hidden">
     <!-- Column headers -->
     <div class="s2-row s2-header">
       <div class="s2-fn s2-fn-head"></div>
@@ -1032,6 +1045,7 @@
       <div class="s2-cell s2-on" style="--c:var(--tas)"></div>
     </div>
   </div>
+  </div><!-- end scroll wrapper -->
 
   <div class="banner"><strong>No single competitor replicates this breadth across all seven functions under one integrated group.</strong></div>
 </div>
