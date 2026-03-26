@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human-Led, AI-Accelerated · Unified Ecosystem</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --bg:       #08121F;
+    --surface:  #0D1C2E;
+    --card:     #112236;
+    --border:   #1E3450;
+    --border2:  #253F60;
+    --white:    #F0F4FA;
+    --muted:    #7A90A8;
+    --dim:      #3E5570;
+
+    --ski:   #E05A2B;
+    --arc:   #1BAF7A;
+    --yot:   #4A88D4;
+    --rob:   #E8A020;
+    --spa:   #C18A15;
+    --ats:   #D84040;
+    --tas:   #5EA620;
+
+    --col-a: #2A5C3A;
+    --col-b: #5C2A1A;
+    --col-c: #1A2E5C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,18,31,0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    padding: 0 1rem;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto;
+  }
+  nav .brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    color: var(--muted);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--border);
+    margin-right: 0.5rem;
+  }
+  .slide-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    color: var(--muted);
+    padding: 14px 16px;
+    white-space: nowrap;
+    transition: color .2s;
+    border-bottom: 2px solid transparent;
+  }
+  .slide-btn:hover { color: var(--white); }
+  .slide-btn.active { color: var(--white); border-bottom-color: var(--white); }
+
+  /* ── SLIDE PANELS ── */
+  .slide { display: none; padding: 1.5rem 1rem 3rem; max-width: 1200px; margin: 0 auto; }
+  .slide.active { display: block; }
+
+  .slide-header { margin-bottom: 1.5rem; }
+  .slide-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 800; line-height: 1.1;
+    margin-bottom: .4rem;
+  }
+  .slide-header p { color: var(--muted); font-size: 13px; }
+
+  /* ── COMPANY TABS (SLIDE 1) ── */
+  .company-tabs {
+    display: flex; gap: 4px;
+    overflow-x: auto; padding-bottom: 2px;
+    margin-bottom: 1.25rem;
+    scrollbar-width: none;
+  }
+  .company-tabs::-webkit-scrollbar { display: none; }
+  .ctab {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px 8px 0 0;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 11px; font-weight: 600;
+    color: var(--muted);
+    transition: all .2s;
+    border-bottom: 2px solid transparent;
+  }
+  .ctab:hover { color: var(--white); background: var(--surface); }
+  .ctab.active { color: var(--white); background: var(--surface); border-bottom-color: var(--white); }
+
+  .company-panel { display: none; }
+  .company-panel.active { display: block; }
+
+  /* ── COMPANY DETAIL CARD ── */
+  .co-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .co-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .co-accent { width: 4px; border-radius: 4px; flex-shrink: 0; align-self: stretch; min-height: 40px; }
+  .co-header-text { flex: 1; min-width: 200px; }
+  .co-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem; font-weight: 700;
+    margin-bottom: .2rem;
+  }
+  .co-header .role { color: var(--muted); font-size: 12px; margin-bottom: .5rem; }
+  .co-header .meta { color: var(--dim); font-size: 11px; line-height: 1.6; }
+
+  .co-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px,1fr));
+    border-bottom: 1px solid var(--border);
+  }
+  .co-stat {
+    padding: .75rem 1rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .co-stat:last-child { border-right: none; }
+  .co-stat .val {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 700;
+    display: block; margin-bottom: 2px;
+  }
+  .co-stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+  .co-body { padding: 1.25rem 1.5rem; }
+  .fn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: .75rem;
+    margin-bottom: 1rem;
+  }
+  .fn-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .9rem 1rem;
+  }
+  .fn-box h4 {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: .6rem;
+  }
+  .fn-box ul { padding-left: 1rem; }
+  .fn-box li { font-size: 12px; color: var(--white); margin-bottom: 3px; line-height: 1.4; }
+
+  .co-tags-section { margin-bottom: .75rem; }
+  .co-tags-section h4 {
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); margin-bottom: .5rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .tag {
+    font-size: 10px; font-weight: 500;
+    padding: 3px 9px; border-radius: 20px;
+    border: 1px solid; white-space: nowrap;
+  }
+
+  /* ── SLIDE 2 FUNCTION ROWS ── */
+  .fn-rows { display: flex; flex-direction: column; gap: 0; }
+  .fn-row {
+    display: flex; align-items: flex-start;
+    border: 1px solid var(--border);
+    border-top: none;
+    background: var(--surface);
+    transition: background .15s;
+  }
+  .fn-row:first-child { border-top: 1px solid var(--border); border-radius: 10px 10px 0 0; }
+  .fn-row:last-child { border-radius: 0 0 10px 10px; }
+  .fn-row:nth-child(even) { background: var(--card); }
+  .fn-row:hover { background: #142638; }
+  .fn-num {
+    width: 36px; flex-shrink: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    color: var(--dim);
+    padding: 1rem .5rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    align-self: stretch;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fn-info {
+    width: 300px; flex-shrink: 0;
+    padding: .8rem .9rem;
+    border-right: 1px solid var(--border);
+  }
+  .fn-info h3 { font-size: 13px; font-weight: 600; margin-bottom: .3rem; }
+  .fn-info p { font-size: 11px; color: var(--muted); line-height: 1.4; }
+  .fn-pills {
+    flex: 1; padding: .6rem .75rem;
+    display: flex; flex-wrap: wrap; gap: .25rem; align-content: center;
+  }
+  .epill {
+    font-size: 10px; font-weight: 600;
+    padding: 3px 9px; border-radius: 20px;
+    color: #fff; white-space: nowrap;
+  }
+
+  /* ── LEGEND BAR ── */
+  .legend-bar {
+    display: flex; flex-wrap: wrap; gap: .4rem;
+    margin-bottom: 1rem;
+    padding: .75rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .leg-item { display: flex; align-items: center; gap: 5px; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .leg-label { font-size: 11px; color: var(--muted); }
+
+  /* ── SLIDE 3 MATRIX ── */
+  .matrix { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
+  .matrix th {
+    padding: .6rem .8rem;
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .08em;
+    text-align: left;
+  }
+  .matrix td {
+    padding: .7rem .8rem;
+    vertical-align: top;
+    font-size: 11.5px;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .matrix tr:hover td { background: rgba(255,255,255,.02); }
+  .matrix td ul { padding-left: .9rem; }
+  .matrix td li { margin-bottom: 3px; }
+  .th-fn  { background: #0E1E30; color: var(--muted); width: 120px; }
+  .th-a   { background: #112A1A; color: #5DCAA5; }
+  .th-b   { background: #2A1610; color: #F0997B; }
+  .th-c   { background: #0A1830; color: #85B7EB; }
+  .td-fn  { background: var(--surface); font-weight: 600; font-size: 12px; }
+  .td-a   { background: #0A1A10; color: #9FE1CB; }
+  .td-b   { background: #1A0E08; color: #F5C4B3; }
+  .td-c   { background: #060E1A; color: #B5D4F4; }
+
+  /* ── SLIDE 4 ROADMAP ── */
+  .roadmap { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
+  .roadmap th {
+    padding: .65rem .8rem;
+    font-size: 11px; font-weight: 700;
+    text-align: left;
+  }
+  .roadmap td {
+    padding: .7rem .8rem;
+    vertical-align: top;
+    font-size: 11px;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .roadmap td ul { padding-left: .9rem; }
+  .roadmap td li { margin-bottom: 3px; }
+  .roadmap tr:hover td { background: rgba(255,255,255,.02); }
+  .th-focus { background: #0E1E30; color: var(--muted); width: 110px; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+  .th-03 { background: #112A1A; color: #5DCAA5; }
+  .th-49 { background: #2A2010; color: #FAC775; }
+  .th-10 { background: #0A1830; color: #85B7EB; }
+  .td-focus { background: var(--surface); font-weight: 600; font-size: 11.5px; }
+  .td-03 { background: #080E0A; color: #9FE1CB; }
+  .td-49 { background: #110E04; color: #FAC775; }
+  .td-10 { background: #040810; color: #B5D4F4; }
+
+  /* ── ACCENT STRIP ROW ── */
+  .row-accent { width: 5px; padding: 0 !important; }
+
+  /* ── BOTTOM BANNER ── */
+  .banner {
+    margin-top: 1.5rem;
+    padding: .9rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .banner strong { color: var(--white); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .fn-info { width: 140px; }
+    .matrix th, .matrix td { font-size: 10.5px; padding: .5rem .5rem; }
+    .roadmap th, .roadmap td { font-size: 10px; padding: .5rem .5rem; }
+    .th-fn, .th-focus { width: 80px; }
+    .co-header h2 { font-size: 1.1rem; }
+    nav .brand { display: none; }
+  }
+  @media (max-width: 500px) {
+    .fn-row { flex-direction: column; }
+    .fn-info { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+    .fn-num { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: .4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="brand">SKI · Ecosystem</div>
+  <button class="slide-btn active" onclick="showSlide(1,this)">1 · Companies</button>
+  <button class="slide-btn" onclick="showSlide(2,this)">2 · Functions</button>
+  <button class="slide-btn" onclick="showSlide(3,this)">3 · Transformation</button>
+  <button class="slide-btn" onclick="showSlide(4,this)">4 · Roadmap</button>
+  <button class="slide-btn" onclick="showSlide(5,this)">5 · Verticals &amp; KPIs</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     SLIDE 1 — Seven Companies
+══════════════════════════════════════════════════════════ -->
+<div id="slide1" class="slide active">
+  <div class="slide-header">
+    <h1>A Unified Ecosystem of Complementary Capabilities</h1>
+    <p>Seven specialized entities · One integrated group · Built to serve manufacturing from design through delivery</p>
+  </div>
+
+  <!-- Company tabs -->
+  <div class="company-tabs">
+    <div class="ctab active"   style="border-bottom-color:var(--ski)" onclick="showCo('ski',this)">SK International</div>
+    <div class="ctab" style="--c:var(--arc)" onclick="showCo('arc',this)">Arcstone</div>
+    <div class="ctab" onclick="showCo('yot',this)">Yottaasys</div>
+    <div class="ctab" onclick="showCo('rob',this)">SK Robotics</div>
+    <div class="ctab" onclick="showCo('spa',this)">SK Spares</div>
+    <div class="ctab" onclick="showCo('ats',this)">ATS India</div>
+    <div class="ctab" onclick="showCo('tas',this)">T&AS Designtech</div>
+  </div>
+
+  <!-- ── SKI ── -->
+  <div id="co-ski" class="company-panel active">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--ski)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--ski)">SK International</h2>
+          <div class="role">Engineering Brain + OEM Trust Layer — US Market Face · skinternational.us · Wixom, Michigan USA</div>
+          <div class="meta">CEO: Kishan Ravikondala · ISO 9001 · NMSDC · Michigan Manufacturers Assoc. · Parent of ATS India (affiliate) + SK Robotics + SK Spares · Arcstone + Yottaasys partnership</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--ski)">19+</span><span class="lbl">Years</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--ski)">600+</span><span class="lbl">Projects</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--ski)">50+</span><span class="lbl">Clients</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--ski)">15</span><span class="lbl">Awards</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>Engineering Services</h4>
+            <ul>
+              <li>SPM design for engine lines</li>
+              <li>Transmission lines, BIW lines</li>
+              <li>Robot &amp; factory throughput simulation</li>
+              <li>General automation production line design</li>
+              <li>2D/3D design components</li>
+              <li>Finite element &amp; analysis</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Manufacturing Services</h4>
+            <ul>
+              <li>SPM machines (oiler head, leak test stations)</li>
+              <li>Precision components (high-tolerance machining)</li>
+              <li>Contract manufacturing</li>
+              <li>Low volume production</li>
+              <li>Commercial material handling (Flex MIG Weld Cell)</li>
+              <li>Automatic assembly (Motor Latch, Omron PLC)</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Civil Engineering</h4>
+            <ul>
+              <li>Fall protection (500+ US projects)</li>
+              <li>Structural design (CAD/Revit/SolidWorks)</li>
+              <li>CAD services</li>
+              <li>Electrical &amp; utility (GIS, Grid, AUD/SDS)</li>
+              <li>SAP/Salesforce implementations</li>
+              <li>GIS/LiDAR/3D mapping</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Custom Mfg &amp; Eng + IT + CLS</h4>
+            <ul>
+              <li>Order processing &amp; mgmt (door hardware)</li>
+              <li>Product manuals &amp; catalogues</li>
+              <li>Manufacturing process plans</li>
+              <li>IT staffing &amp; consulting</li>
+              <li>AI/ML solutions</li>
+              <li>Contract launch support + build/buy-off</li>
+            </ul>
+          </div>
+        </div>
+        <div class="co-tags-section">
+          <h4>Key Clients</h4>
+          <div class="tags">
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Nissan USA</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Hirata Corp</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Magna</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Martinrea</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">DuPont</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Comau</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Detroit Chassis</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Samsung</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">ASSA ABLOY</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">RedViking</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Delta Sigma</span>
+            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">New Standard Corp</span>
+          </div>
+        </div>
+        <div class="co-tags-section">
+          <h4>Unique to SKI (not in ATS or T&AS)</h4>
+          <div class="tags">
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Civil/structural engineering</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Fall protection (US)</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Contract launch support (CLS)</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Buy-off services</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Digital Factory initiative</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">AI/ML solutions offering</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Arcstone partnership</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Yottaasys partnership</span>
+            <span class="tag" style="color:var(--ski);border-color:var(--ski)">NMSDC certified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ARCSTONE ── -->
+  <div id="co-arc" class="company-panel">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--arc)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--arc)">Arcstone</h2>
+          <div class="role">Operational + Data Backbone — US and Southeast Asia · arcstone.co</div>
+          <div class="meta">CEO: Willson Deng · Industries: Precision Eng, FMCG, Mining, Semiconductor, Plastics, Biomedical · Detroit (NA HQ) + Singapore (SEA HQ) + Indonesia + Vietnam + Malaysia + Thailand + China</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--arc)">20</span><span class="lbl">arc.ops modules</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--arc)">5</span><span class="lbl">Product platforms</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--arc)">6</span><span class="lbl">Industry verticals</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--arc)">Global</span><span class="lbl">US + SEA presence</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>arc.ops — MES (20 modules)</h4>
+            <ul>
+              <li>arc.quire: machine connectivity (OPC-UA, MQTT)</li>
+              <li>arc.flow: process orchestration + trigger events</li>
+              <li>Scheduler+, Workflow Builder+, Checklist+</li>
+              <li>Inventory+, Equipment Maintenance, Document Mgr</li>
+              <li>Bundles: OEE, Predictive Maintenance (ML), SPC</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>arc.net + arc.green</h4>
+            <ul>
+              <li>arc.net: live supplier production floor visibility</li>
+              <li>Multi-tier supply chain tracing + certifications</li>
+              <li>Buy / Plan / Optimize / Vantage modules</li>
+              <li>arc.green: IIoT sustainability + ESG scoring</li>
+              <li>Energy optimization + product lifecycle mgmt</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>arc.studio + arc.ai</h4>
+            <ul>
+              <li>arc.studio: unlimited enterprise app creation</li>
+              <li>Shop floor to top floor configuration layer</li>
+              <li>arc.ai: AI Control Tower for enterprise</li>
+              <li>Controlled AI governance + workforce enablement</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Industry Verticals + Partners</h4>
+            <ul>
+              <li>Precision Engineering · FMCG · Mining</li>
+              <li>Semiconductor · Plastics · Biomedical</li>
+              <li>System integration partners: Siemens, S+T, AVIEXT</li>
+              <li>Partner program: become/find a partner</li>
+              <li>Wixom Digital Manufacturing Collaboration Center (with SKI)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="co-tags-section">
+          <h4>Unique Strategic Role</h4>
+          <div class="tags">
+            <span class="tag" style="color:var(--arc);border-color:var(--arc)">Operational data backbone across value stream</span>
+            <span class="tag" style="color:var(--arc);border-color:var(--arc)">MES + supply chain + ESG in one stack</span>
+            <span class="tag" style="color:var(--arc);border-color:var(--arc)">arc.studio as tenant config layer</span>
+            <span class="tag" style="color:var(--arc);border-color:var(--arc)">Global SEA reach</span>
+            <span class="tag" style="color:var(--arc);border-color:var(--arc)">Wixom DMC co-investment with SKI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── YOTTAASYS ── -->
+  <div id="co-yot" class="company-panel">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--yot)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--yot)">Yottaasys</h2>
+          <div class="role">Human Intelligence + Perception Layer — Michigan · yottaasys.com · Farmington Hills MI</div>
+          <div class="meta">Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="026f6376762c72706d61766d70427b6d76766363717b712c616d6f">[email&#160;protected]</a> · AI-powered human intelligence platform · Three product suite · 98.7% accuracy · Deploys on existing hardware in minutes</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--yot)">98.7%</span><span class="lbl">Vision &amp; voice accuracy</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--yot)">3</span><span class="lbl">Core AI products</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--yot)">8+</span><span class="lbl">Solution verticals</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--yot)">Min</span><span class="lbl">Deploy time</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>VisionX — AI Vision Layer</h4>
+            <ul>
+              <li>Facial recognition (98.7% accuracy)</li>
+              <li>Facial coding (expressions → emotions)</li>
+              <li>Object &amp; defect detection (production QC)</li>
+              <li>Eye tracking + gaze analysis</li>
+              <li>Contactless 2-step authentication</li>
+              <li>Works on existing webcams/cameras</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>EmotionX — Emotion Intelligence</h4>
+            <ul>
+              <li>Eye + gaze + facial coding + voice combined</li>
+              <li>Video ad analysis (emotional ROAS)</li>
+              <li>UX testing (product/interface emotions)</li>
+              <li>Focus group replacement via AI</li>
+              <li>Micro-expressions + A/B emotion testing</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>VoiceX — Conversational Intelligence</h4>
+            <ul>
+              <li>Beyond STT: tone + sentiment + emotion</li>
+              <li>98.7% multilingual accuracy</li>
+              <li>Tone-Check, Right Sentiment, Emotional Quotient</li>
+              <li>Voice Assist (real-time telesales coaching)</li>
+              <li>Meeting transcriptions (multi-speaker)</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Cross-Product Solutions</h4>
+            <ul>
+              <li>Employee compliance (facial + gaze + voice)</li>
+              <li>Behavioral risk pattern tracking</li>
+              <li>Attention measurement (remote workforce)</li>
+              <li>Process optimization (QC, ingredient counting)</li>
+              <li>Presentation attack detection</li>
+              <li>Device detection (data security)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="co-tags-section">
+          <h4>Unique Strategic Role</h4>
+          <div class="tags">
+            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Only perception layer in the ecosystem</span>
+            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Sees + hears + feels what machines cannot</span>
+            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Works on existing webcams</span>
+            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Minutes to deploy</span>
+            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Industry 5.0 human intelligence thesis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SK ROBOTICS ── -->
+  <div id="co-rob" class="company-panel">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--rob)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--rob)">SK Robotics</h2>
+          <div class="role">Physical Autonomous Workforce · skrobotics.us · Parent: SK International</div>
+          <div class="meta">Autonomous Mobile Robots (AMR) · Integration-first design philosophy · Serving automotive, logistics, packaging, general manufacturing · "Built to Move You Forward"</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--rob)">3</span><span class="lbl">AMR product series</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--rob)">300kg–2T</span><span class="lbl">Payload range</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--rob)">2</span><span class="lbl">Software platforms</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--rob)">WMS+ERP</span><span class="lbl">Native integration</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>AMR Hardware Products</h4>
+            <ul>
+              <li><strong>Lidar Series:</strong> L300, L300e, L500, L500e, L1000, L1500, L2000 — 300kg to 2,000kg payload</li>
+              <li><strong>Guided Series:</strong> G300, G300e, G300l — guided path navigation</li>
+              <li><strong>Autonomous Forklift:</strong> F1200, F1600, F2000 — 1,200kg to 2,000kg lift capacity</li>
+              <li>Integration with cobots, conveyors, existing systems</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Software Platforms</h4>
+            <ul>
+              <li><strong>DFleet:</strong> AMR traffic control + task management</li>
+              <li>WMS + ERP native integration</li>
+              <li>Dynamic path management for high-density environments</li>
+              <li>Optimization reports (utilization, accuracy)</li>
+              <li><strong>NavWiz:</strong> Control + navigation software</li>
+              <li>Complex environment routing + real-time optimization</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Agentic AI Integration Points</h4>
+            <ul>
+              <li>arc.ops Inventory+ → low stock → DFleet dispatches AMR</li>
+              <li>Scheduler+ job sequencing → NavWiz route optimization</li>
+              <li>VisionX floor monitoring + AMR path awareness</li>
+              <li>arc.quire machine state → AMR material staging</li>
+              <li>Cobot collaboration — human + robot + AMR</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Unique Strategic Role</h4>
+            <ul>
+              <li>Physical autonomous execution layer of the platform</li>
+              <li>Agents can dispatch robots without human instruction on routine moves</li>
+              <li>Only entity in group that makes something physically move</li>
+              <li>DFleet already speaks ERP data language — zero integration friction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SK SPARES ── -->
+  <div id="co-spa" class="company-panel">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--spa)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--spa)">SK Spares</h2>
+          <div class="role">Aftermarket + Machine Continuity Layer · sk-spares.us · An SK International Company</div>
+          <div class="meta">ISO 9001:2015 · Full Quality Lab + CMM certification · Dual facility: USA + India · Dedicated spare parts brand for manufacturing clients</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--spa)">24hr</span><span class="lbl">Critical SPM parts</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--spa)">1–1K</span><span class="lbl">Short-run production</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--spa)">CMM</span><span class="lbl">Certified inspection</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--spa)">2</span><span class="lbl">Facilities: USA + India</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>Core Capability</h4>
+            <ul>
+              <li>Precision spare parts crafted with CNC milling and turning</li>
+              <li>Short-run production: 1 piece to 1,000 pieces</li>
+              <li>Single parts AND full assemblies</li>
+              <li>CMM (Coordinate Measuring Machine) inspection on every part</li>
+              <li>Leverages both USA facility and India facility for cost optimization</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Service Differentiators</h4>
+            <ul>
+              <li>Critical SPM parts made as fast as 24 hours</li>
+              <li>Custom solutions: customer provides drawings OR reverse engineering</li>
+              <li>Reverse engineering capability — produces drawing for future reference</li>
+              <li>Specializes in parts for Special Purpose Machinery</li>
+              <li>Fabrication services alongside machining</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Agentic AI Integration Points</h4>
+            <ul>
+              <li>Predictive maintenance agent triggers SK Spares order before failure</li>
+              <li>arc.ops Equipment Maintenance module feeds demand signal</li>
+              <li>24hr turnaround = same-shift resolution</li>
+              <li>Reverse engineering = no drawing needed from customer</li>
+              <li>Dual-facility = cost optimization by part complexity</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Unique Strategic Role</h4>
+            <ul>
+              <li>Aftermarket revenue engine — keeps machines running after SKI and ATS build them</li>
+              <li>Closes the predictive loop: detect → predict → source → deliver</li>
+              <li>No competitor replicates 24hr CMM-certified SPM parts with reverse engineering</li>
+              <li>Platform tier: subscription customers get 24hr SLA as a named guarantee</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ATS INDIA ── -->
+  <div id="co-ats" class="company-panel">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--ats)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--ats)">ATS India</h2>
+          <div class="role">India Engineering + Defence Execution — AV SK Affiliate · atsindia.net · Hyderabad, India</div>
+          <div class="meta">AS9100D aerospace certified · ANAB accredited · Est. 2011 · Clients: Ford, GM, Stellantis, ASSA ABLOY, Nissan, Indian Tier-1, Aero &amp; Defence · Parent: SKInternational.us</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--ats)">15</span><span class="lbl">Years</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--ats)">650+</span><span class="lbl">Projects</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--ats)">65+</span><span class="lbl">Clients</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--ats)">AS9100D</span><span class="lbl">Aerospace cert</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>Engineering Services</h4>
+            <ul>
+              <li>Assembly line automation (seat track, engine, transmission)</li>
+              <li>SPMs — Leak Test Station Design for engine</li>
+              <li>BIW engineering (Revolver Tooling, OEMs + Tier1)</li>
+              <li>2D/3D with robot simulation · design engineering</li>
+              <li>General engineering: 2D-3D CAD, drawing packages, BOM</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Manufacturing Services</h4>
+            <ul>
+              <li>Automated assembly &amp; quality testing (Motor Latch, Omron PLC)</li>
+              <li>Precision machining (large batch, high tolerance)</li>
+              <li>Fabrication: MS, Stainless Steel, Aluminum</li>
+              <li>SPMs for transmission gearboxes (major car manufacturer)</li>
+              <li>Rust-resistant fabrications</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Defence (Unique to ATS)</h4>
+            <ul>
+              <li>Ballistic Range Defence Equipment</li>
+              <li>Stab Resist Test Equipment (bulletproof vest)</li>
+              <li>Drop Test Equipment (backing material evaluation)</li>
+              <li>Gun Mounting Stand (firearms positioning)</li>
+              <li>Light Screen Stand (bullet velocity measurement)</li>
+              <li>Head Foam/Clay Box Stand · Defence R&amp;D + law enforcement partnerships</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Software Automation</h4>
+            <ul>
+              <li>LabView, Siemens, Allen Bradley, Omron, Schneider</li>
+              <li>Electrical engineering — fluid schematics, BOM</li>
+              <li>Advanced robot + process simulation with FMEA</li>
+              <li>SK Robotics AMR (DFleet + NavWiz) — shared subsidiary</li>
+            </ul>
+          </div>
+        </div>
+        <div class="co-tags-section">
+          <h4>Unique to ATS (not in SKI or T&AS)</h4>
+          <div class="tags">
+            <span class="tag" style="color:var(--ats);border-color:var(--ats)">Ballistic range defence equipment</span>
+            <span class="tag" style="color:var(--ats);border-color:var(--ats)">AS9100D aerospace certification</span>
+            <span class="tag" style="color:var(--ats);border-color:var(--ats)">LabView/Siemens/Allen Bradley software dev</span>
+            <span class="tag" style="color:var(--ats);border-color:var(--ats)">SK Robotics AMR (DFleet + NavWiz)</span>
+            <span class="tag" style="color:var(--ats);border-color:var(--ats)">Impact/orbital/radial/roller forming</span>
+            <span class="tag" style="color:var(--ats);border-color:var(--ats)">C&amp;B Machinery partnership</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── T&AS ── -->
+  <div id="co-tas" class="company-panel">
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:var(--tas)"></div>
+        <div class="co-header-text">
+          <h2 style="color:var(--tas)">T&AS Designtech</h2>
+          <div class="role">India Knowledge Work + Documentation Engine · tasengg.com · cloudifai.com · Hyderabad, India</div>
+          <div class="meta">ISO 9001:2015 · TÜV India · NABCB · IAF certified · Michigan MSDC partner · "Completely self-reliant and IT enabled" · Cloudifai = new company website development environment</div>
+        </div>
+      </div>
+      <div class="co-stats">
+        <div class="co-stat"><span class="val" style="color:var(--tas)">ISO</span><span class="lbl">9001:2015</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--tas)">TÜV</span><span class="lbl">India certified</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--tas)">NABCB</span><span class="lbl">Accredited</span></div>
+        <div class="co-stat"><span class="val" style="color:var(--tas)">MSDC</span><span class="lbl">Michigan partner</span></div>
+      </div>
+      <div class="co-body">
+        <div class="fn-grid">
+          <div class="fn-box">
+            <h4>Order Processing &amp; Management</h4>
+            <ul>
+              <li>Full lifecycle: intake → production → delivery</li>
+              <li>Technical + non-technical order processing</li>
+              <li>Hollow Metal/Hardware industries specialist</li>
+              <li>40% process cost reduction · 8–24hr turnaround</li>
+              <li>Deploys/trains teams on customer's own platforms</li>
+              <li>Quotations, pricing, billing, shipping management</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>CAD + GIS Services</h4>
+            <ul>
+              <li>2D-to-3D conversion · BIM · interference detection</li>
+              <li>Rebar schedules · precast piece tickets</li>
+              <li>Steel fabrication drawings for North America</li>
+              <li>GIS: Base, Urban, Topographical, Hydrological, Cadastral, Thematic Maps</li>
+              <li>3D Mapping: DTM/DSM/DEM · LiDAR processing</li>
+              <li>Orthophotos for 2D mapping in multiple resolutions</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>General Engineering</h4>
+            <ul>
+              <li>Manufacturing drawings creation/review/update</li>
+              <li>Product manuals &amp; catalogues</li>
+              <li>Machine design (custom machines, platforms, robotics)</li>
+              <li>Mechanical design and analysis</li>
+              <li>Process and project layout design</li>
+              <li>Interior design and layout planning</li>
+            </ul>
+          </div>
+          <div class="fn-box">
+            <h4>Structural + Civil + Utility</h4>
+            <ul>
+              <li>Civil &amp; Structural CAD (US/Canadian/Indian codes)</li>
+              <li>Steel shop drawings (connections, bolt layouts, weld symbols)</li>
+              <li>Fall protection systems (interior, exterior, custom)</li>
+              <li>Structural engineering (foundations, retaining walls, steel structures)</li>
+              <li>Utility &amp; substation design (AUD/SDS, SAP/Salesforce)</li>
+              <li>Architectural services for modular manufacturing</li>
+            </ul>
+          </div>
+        </div>
+        <div class="co-tags-section">
+          <h4>T&AS Value Proposition (from "Why T&AS")</h4>
+          <div class="tags">
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Cost + quality advantage</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Critical time zone advantage</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Dedicated account manager</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">40% process cost reduction</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">8–24hr order turnaround</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Hollow Metal/Hardware specialist</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">North America construction drawings</span>
+            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Pure knowledge-work model (no physical mfg)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner">Collectively serving: <strong>Automotive · Aerospace · Defence · Precision Engineering · FMCG · Mining · Semiconductor · Biomedical · Civil Infrastructure · Logistics</strong></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SLIDE 2 — Functions
+══════════════════════════════════════════════════════════ -->
+<div id="slide2" class="slide">
+  <div class="slide-header">
+    <h1>One Integrated Business — Mapped by Function</h1>
+    <p>Seven functions · Multiple entities · Stronger together than any single competitor</p>
+  </div>
+  <div class="legend-bar">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--ski)"></div><span class="leg-label">SK International</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--arc)"></div><span class="leg-label">Arcstone</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--yot)"></div><span class="leg-label">Yottaasys</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--rob)"></div><span class="leg-label">SK Robotics</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--spa)"></div><span class="leg-label">SK Spares</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--ats)"></div><span class="leg-label">ATS India</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--tas)"></div><span class="leg-label">T&AS Designtech</span></div>
+  </div>
+  <div class="fn-rows">
+    <div class="fn-row">
+      <div class="fn-num">01</div>
+      <div class="fn-info"><h3>Platform + Product</h3><p>arc.ops MES · arc.net · arc.green · arc.studio · arc.ai · VisionX/VoiceX/EmotionX · AMR hardware · CMM spare parts · SPM &amp; defence equipment</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--ski)">SKI</span>
+        <span class="epill" style="background:var(--arc)">Arcstone</span>
+        <span class="epill" style="background:var(--yot)">Yottaasys</span>
+        <span class="epill" style="background:var(--rob)">SK Robotics</span>
+        <span class="epill" style="background:var(--spa)">SK Spares</span>
+        <span class="epill" style="background:var(--ats)">ATS India</span>
+      </div>
+    </div>
+    <div class="fn-row">
+      <div class="fn-num">02</div>
+      <div class="fn-info"><h3>Engineering + AI Integration</h3><p>SPM + BIW + FEA + robot simulation · CAD/BIM/structural · GIS/LiDAR · PLC + Siemens · AS9100D aerospace engineering</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--ski)">SKI</span>
+        <span class="epill" style="background:var(--ats)">ATS India</span>
+        <span class="epill" style="background:var(--tas)">T&AS</span>
+      </div>
+    </div>
+    <div class="fn-row">
+      <div class="fn-num">03</div>
+      <div class="fn-info"><h3>Manufacturing + Physical AI</h3><p>Precision components · contract mfg · automated assembly · AMR 300kg–2T · VisionX line monitoring · arc.quire · arc.flow · Scheduler+</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--ski)">SKI</span>
+        <span class="epill" style="background:var(--ats)">ATS India</span>
+        <span class="epill" style="background:var(--rob)">SK Robotics</span>
+        <span class="epill" style="background:var(--yot)">Yottaasys</span>
+        <span class="epill" style="background:var(--arc)">Arcstone</span>
+      </div>
+    </div>
+    <div class="fn-row">
+      <div class="fn-num">04</div>
+      <div class="fn-info"><h3>Aftermarket Intelligence, Supply Chain + ESG</h3><p>24hr CMM-certified SPM parts · reverse engineering · arc.net supplier visibility · arc.green IIoT ESG · Scope 3 · GIS/LiDAR baselines</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--spa)">SK Spares</span>
+        <span class="epill" style="background:var(--arc)">Arcstone</span>
+        <span class="epill" style="background:var(--tas)">T&AS</span>
+        <span class="epill" style="background:var(--ski)">SKI</span>
+      </div>
+    </div>
+    <div class="fn-row">
+      <div class="fn-num">05</div>
+      <div class="fn-info"><h3>Knowledge Work Transformation</h3><p>Hollow Metal/Hardware order processing · 40% cost reduction · CAD/BIM/2D-3D · North America construction drawings · product manuals · structural design</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--tas)">T&AS</span>
+        <span class="epill" style="background:var(--ski)">SKI</span>
+      </div>
+    </div>
+    <div class="fn-row">
+      <div class="fn-num">06</div>
+      <div class="fn-info"><h3>People + Upskilling</h3><p>Engineering expertise · AI literacy · domain knowledge deepening · professional judgment · client leadership · cross-entity knowledge sharing · Wixom DMC hub</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--ski)">SKI</span>
+        <span class="epill" style="background:var(--arc)">Arcstone</span>
+        <span class="epill" style="background:var(--yot)">Yottaasys</span>
+        <span class="epill" style="background:var(--rob)">SK Robotics</span>
+        <span class="epill" style="background:var(--spa)">SK Spares</span>
+        <span class="epill" style="background:var(--ats)">ATS India</span>
+        <span class="epill" style="background:var(--tas)">T&AS</span>
+      </div>
+    </div>
+    <div class="fn-row">
+      <div class="fn-num">07</div>
+      <div class="fn-info"><h3>Go-to-Market + Partnerships</h3><p>OEM relationships Nissan/Hirata/Ford/GM · Arcstone SEA offices · partner + reseller program · unified group brand · subscription platform commercialization</p></div>
+      <div class="fn-pills">
+        <span class="epill" style="background:var(--ski)">SKI</span>
+        <span class="epill" style="background:var(--arc)">Arcstone</span>
+        <span class="epill" style="background:var(--yot)">Yottaasys</span>
+        <span class="epill" style="background:var(--ats)">ATS India</span>
+        <span class="epill" style="background:var(--tas)">T&AS</span>
+      </div>
+    </div>
+  </div>
+  <div class="banner"><strong>No single competitor replicates this breadth across all seven functions under one integrated group.</strong></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SLIDE 3 — Transformation
+══════════════════════════════════════════════════════════ -->
+<div id="slide3" class="slide">
+  <div class="slide-header">
+    <h1>Human-Led, AI-Accelerated: Our Transformation Roadmap</h1>
+    <p>Where we lead today · What AI is transforming · How we grow stronger through it</p>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="th-fn">Function</th>
+        <th class="th-a">Our Differentiator vs Competition</th>
+        <th class="th-b">What AI Is Transforming</th>
+        <th class="th-c">Our Focus: Lead the Change, Grow the Business</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-fn">Platform<br>+ Product</td>
+        <td class="td-a"><ul><li>Only group: MES + supply chain + ESG + perception AI + AMR + 24hr spare parts + AS9100D — all under one platform roof</li><li>No competitor has more than 3 of these simultaneously</li></ul></td>
+        <td class="td-b"><ul><li>Standalone point solutions collapsing into integrated AI platforms</li><li>Disconnected QC, ESG, MES, order tools lose market relevance</li></ul></td>
+        <td class="td-c"><ul><li>arc.studio + arc.ai become the subscription operating system</li><li>3 agents deployed: MES Intelligence, Predictive Quality, Supply Chain + ESG</li><li>Platform subscription revenue replaces project revenue across the group</li></ul></td>
+      </tr>
+      <tr>
+        <td class="td-fn">Engineering<br>+ AI Integ.</td>
+        <td class="td-a"><ul><li>19yr OEM patterns (SKI) + AS9100D aerospace depth (ATS India) + CAD/BIM/GIS delivery (T&AS) — no competitor combines all three</li></ul></td>
+        <td class="td-b"><ul><li>Routine 2D-3D conversion at T&AS</li><li>Standard FEA iterations at SKI</li><li>Repetitive robot simulation setup at ATS India</li><li>Manual PLC documentation at ATS India</li></ul></td>
+        <td class="td-c"><ul><li>SKI engineers validate AI-generated FEA — focus on novel failure modes</li><li>ATS India: AI-assisted PLC/Siemens documentation — engineers own sign-off</li><li>T&AS: AI CAD generation — engineers review code compliance + client context</li><li>Domain knowledge structured as agent training data — platform asset</li></ul></td>
+      </tr>
+      <tr>
+        <td class="td-fn">Mfg +<br>Physical AI</td>
+        <td class="td-a"><ul><li>Only group where an AI agent can detect issue, re-sequence arc.ops Scheduler+, dispatch SK Robotics AMR, alert SK Spares in one automated loop</li><li>650+ OEM-proven projects</li></ul></td>
+        <td class="td-b"><ul><li>Manual production scheduling adjustments by supervisors</li><li>Manual material movement on predictable routes</li><li>Manual shift handover status reports</li></ul></td>
+        <td class="td-c"><ul><li>arc.quire + VisionX → Predictive Quality Agent fires before defect occurs</li><li>SK Robotics DFleet receives dispatch from arc.ops — no human needed for routine moves</li><li>Supervisors manage exceptions, client relationships, quality escalations only</li></ul></td>
+      </tr>
+      <tr>
+        <td class="td-fn">Aftermarket,<br>SC + ESG</td>
+        <td class="td-a"><ul><li>arc.net live supplier visibility + SK Spares 24hr CMM parts + T&AS GIS/LiDAR baselines + arc.green IIoT ESG — no competitor combines all four</li></ul></td>
+        <td class="td-b"><ul><li>Reactive parts ordering after failure — avg $50K–$500K downtime per incident</li><li>Manual annual ESG collection via spreadsheets</li><li>Supplier disruptions discovered after hitting production line</li></ul></td>
+        <td class="td-c"><ul><li>Predictive agent fires SK Spares order before failure — 24hr SLA as platform tier</li><li>arc.net Vantage auto-surfaces sourcing alternatives on supplier risk event</li><li>arc.green auto-generates Scope 3 report in EU CSRD format — regulatory urgency creates demand</li></ul></td>
+      </tr>
+      <tr>
+        <td class="td-fn">Knowledge<br>Work Trans.</td>
+        <td class="td-a"><ul><li>T&AS 40% cost reduction + 8–24hr turnaround in Hollow Metal/Hardware</li><li>CAD, BIM, GIS, LiDAR, structural, substation at India cost with North America quality standards</li></ul></td>
+        <td class="td-b"><ul><li>Standard CAD drafting — AI tools produce standard drawing types in minutes</li><li>Manual Hollow Metal order entry — AI agents handle end-to-end routine</li><li>Standard GIS map creation — automated AI pipelines replace manual</li></ul></td>
+        <td class="td-c"><ul><li>T&AS: AI CAD generation — engineers shift to code compliance + client coordination</li><li>Order processing team on AI-assisted workflows — same headcount, higher volume</li><li>GIS team: ESG interpretation + client advisory, not base map production</li><li>Outcome-based pricing piloted: per deliverable, not per hour</li></ul></td>
+      </tr>
+      <tr>
+        <td class="td-fn">People +<br>Upskilling</td>
+        <td class="td-a"><ul><li>Seven-entity group spanning OEM engineering, AS9100D aerospace, AI perception, autonomous robotics, precision manufacturing, geospatial intelligence — human expertise no competitor replicates</li></ul></td>
+        <td class="td-b"><ul><li>Manual drafting hours at T&AS on standard drawing types</li><li>Manual FEA iteration setup at SKI + ATS India</li><li>Manual GIS map creation at T&AS</li><li>Manual shift status reports — arc.ops generates these automatically</li></ul></td>
+        <td class="td-c"><ul><li>SKI: interpret AI-generated FEA, identify failure modes AI misses</li><li>ATS India: AI-assisted PLC documentation using Siemens/Allen Bradley AI tooling</li><li>T&AS: AI CAD supervision, North America code compliance review, client delivery</li><li>Yottaasys: VisionX calibration for automotive weld vs semiconductor vs precision defects</li><li>SK Robotics: configure DFleet to receive arc.ops agent dispatch instructions</li></ul></td>
+      </tr>
+      <tr>
+        <td class="td-fn">Go-to-Market<br>+ Partnerships</td>
+        <td class="td-a"><ul><li>Warm OEM relationships: Nissan, Hirata, Magna, Detroit Chassis (SKI) + Ford, GM, Stellantis, ASSA ABLOY (ATS India)</li><li>Arcstone SEA offices: Singapore, Indonesia, Vietnam, Malaysia</li><li>100+ existing client relationships — no cold outreach for first 10 subscriptions</li></ul></td>
+        <td class="td-b"><ul><li>Seven entity websites — new prospect cannot understand the integrated group</li><li>Project/time-billed revenue faces margin compression as AI lowers industry delivery costs</li><li>No unified subscription offer exists despite platform capability being available</li></ul></td>
+        <td class="td-c"><ul><li>Pilot subscription: Nissan, Hirata, Detroit Chassis via SKI relationships</li><li>Unified group digital front door: one story, seven capabilities, legible in 2 minutes</li><li>Human-Led AI-Accelerated brand campaign: SKI + Arcstone + Yottaasys channels</li><li>Activate Arcstone SEA for Precision Engineering + Semiconductor pipeline</li><li>OEM partner track: one OEM deal = 20–50 supplier subscriptions automatically</li></ul></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="banner"><strong>Human-Led, AI-Accelerated.</strong> We are not defending against the AI wave — we are building the platform that rides it.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SLIDE 4 — Roadmap
+══════════════════════════════════════════════════════════ -->
+<div id="slide4" class="slide">
+  <div class="slide-header">
+    <h1>Strategic Roadmap: Actions to Grow and Strengthen the Group</h1>
+    <p>Efficiency · Customer Centricity · Human-Led AI-Accelerated · Market Leadership</p>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="roadmap">
+    <thead>
+      <tr>
+        <th class="th-focus">Focus Area</th>
+        <th class="th-03">0–3 Months · Foundation</th>
+        <th class="th-49">4–9 Months · Scale</th>
+        <th class="th-10">10–18 Months · Lead</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-focus">Platform<br>+ Product</td>
+        <td class="td-03"><ul>
+          <li>Define manufacturing data contract schema — ERP-agnostic: work order, BOM, inventory, routing, quality hold</li>
+          <li>Build 3 ERP adapters: SAP, Oracle, Epicor</li>
+          <li>Deploy Agent #1 MES Intelligence on 1 pilot customer (SKI Nissan/Hirata or Arcstone arc.ops base) — live by week 10</li>
+          <li>Configure arc.studio Automotive vertical template pre-seeded with SKI engineering knowledge</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>Deploy Agent #2 Predictive Quality — arc.quire + VisionX correlation model live</li>
+          <li>Deploy Agent #3 Supply Chain + ESG — arc.net risk + arc.green Scope 3 auto-report</li>
+          <li>Expand to 8 ERP adapters: add Infor, SYSPRO, Dynamics, Plex</li>
+          <li>Build Precision Engineering + FMCG vertical templates in arc.studio</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>Cross-customer learning flywheel active — defect patterns from all tenants improve VisionX accuracy for every new customer</li>
+          <li>arc.studio self-serve agent builder — customers configure micro-agents without engineering support</li>
+          <li>ESG compliance auto-report sold as standalone subscription SKU targeting EU CSRD + OEM Scope 3 deadlines</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="td-focus">Engineering<br>+ AI Integ.</td>
+        <td class="td-03"><ul>
+          <li>SKI: structured capture of 19yr SPM failure modes, BIW tolerance thresholds, FEA root cause libraries — formatted as agent knowledge base</li>
+          <li>ATS India: map PLC configuration patterns + AS9100D documentation standards as second knowledge layer</li>
+          <li>T&AS: pilot AI CAD generation tool on one North America structural drawing project — measure output quality vs manual time</li>
+          <li>Commission IP ownership + governance agreement across all 7 entities</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>SKI engineers: AI-assisted FEA on live client projects — target 40% reduction in iteration cycle time</li>
+          <li>ATS India: AI-assisted Siemens + Allen Bradley PLC documentation — engineers validate, own client sign-off</li>
+          <li>T&AS: shift 20% of standard CAD/structural drawing production to AI generation — engineers review for compliance + client context</li>
+          <li>ATS defence patterns seeded into agent library for AS9100D vertical pilot</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>SKI engineering knowledge formally structured as premium platform knowledge layer available to subscription customers</li>
+          <li>ATS AS9100D credential opens defence + aerospace AI agent vertical — first 2 defence manufacturer prospects identified and approached</li>
+          <li>T&AS AI-assisted CAD mature — outcome-based pricing introduced alongside time-billed work for willing clients</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="td-focus">Mfg +<br>Physical AI</td>
+        <td class="td-03"><ul>
+          <li>Install VisionX on pilot production line — configure defect model for that line's specific product type</li>
+          <li>Connect arc.quire machine data to VisionX — define combined machine drift + operator attention threshold</li>
+          <li>Connect SK Robotics DFleet to arc.ops Inventory+ — demonstrate first agent-dispatched AMR material move on pilot floor</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>Predictive Quality Agent live — full closed loop: arc.quire detects drift → VisionX confirms → agent re-sequences Scheduler+ → DFleet dispatches AMR → SK Spares alerted</li>
+          <li>Measure unplanned downtime reduction vs pre-agent baseline</li>
+          <li>VisionX operator attention monitoring deployed as standard on all pilot customer lines</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>Cobot + AMR + agent orchestration showcase live at Wixom DMC — used for prospect demos and customer training</li>
+          <li>SK Robotics standard platform subscription tier — agents dispatch AMRs on routine moves across all customers without human instruction</li>
+          <li>ATS India AS9100D manufacturing line integrated — defence/aerospace clients served with certified data</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="td-focus">Aftermarket,<br>SC + ESG</td>
+        <td class="td-03"><ul>
+          <li>Upload SK Spares full parts catalog + CMM cert data into arc.ops Equipment Maintenance — define predictive trigger thresholds per machine class</li>
+          <li>Connect arc.net to pilot customer tier-1 supplier production systems</li>
+          <li>Map T&AS GIS + LiDAR datasets as arc.green ESG environmental baselines — define Scope 3 data schema</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>Predictive parts ordering live — arc.quire crosses threshold → agent triggers SK Spares fulfillment automatically → 24hr SLA measured and reported</li>
+          <li>arc.net Vantage surfaces alternative sourcing within 4 hours of supplier risk event</li>
+          <li>arc.green generates first Scope 3 ESG compliance report for pilot customer — validated against EU CSRD format by SKI civil team</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>SK Spares 24hr parts fulfillment guarantee embedded as named tier in platform subscription — customers pay for proactive continuity</li>
+          <li>ESG compliance auto-report sold as standalone subscription SKU — target EU-exposed supply chains + OEM supplier bases</li>
+          <li>T&AS LiDAR + GIS data becomes environmental traceability differentiator vs competitors using factory-level ESG data only</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="td-focus">Knowledge<br>Work Trans.</td>
+        <td class="td-03"><ul>
+          <li>T&AS internal audit: map every service line to AI displacement risk and growth opportunity — output: prioritized automation + investment list</li>
+          <li>Trial 3 specific AI tools: one for CAD/structural drawing generation, one for GIS/LiDAR processing automation, one for order management workflow automation</li>
+          <li>Define new T&AS value proposition: AI-supervised engineering outputs — faster delivery, consistent quality — draft revised service descriptions + pricing model</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>T&AS deploys AI CAD generation on North America structural + BIM projects — all AI outputs reviewed by engineers for code compliance + client context before delivery</li>
+          <li>GIS + LiDAR base map processing automated via AI pipeline — T&AS GIS team time reallocated to ESG interpretation, environmental analysis, client advisory</li>
+          <li>First outcome-based pricing contract signed with existing T&AS client — price per drawing set or report, not per hour</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>T&AS revenue model formally split: time-billed legacy work + outcome-based AI-supervised deliverables + platform-linked documentation services</li>
+          <li>T&AS becomes the structured knowledge + documentation engine for the platform — order data, drawing data, GIS data flowing as structured inputs to agent context</li>
+          <li>First T&AS direct North America client acquired through own digital presence independent of SKI channel</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="td-focus">People +<br>Upskilling</td>
+        <td class="td-03"><ul>
+          <li>Joint AI awareness + confidence workshop all 7 entities: what AI does in each domain, what each person's role looks like alongside it — name one AI Champion per entity</li>
+          <li>SKI engineers: workshop on reading + validating AI-generated FEA outputs — where to trust, where to override</li>
+          <li>ATS India engineers: workshop on AI-assisted PLC documentation using Siemens + Allen Bradley platforms</li>
+          <li>T&AS engineers: workshop on supervising AI CAD outputs — code compliance checklist, client delivery standards, quality review process</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>SKI engineering leads: advanced program on cross-functional problem framing — structuring novel challenges so AI tools assist rather than producing generic outputs</li>
+          <li>ATS India: AS9100D AI-assisted documentation workflows — test + measurement data, ballistic range reports, certification evidence packages</li>
+          <li>T&AS senior engineers: North America structural code expertise deepened — IBC, ASCE, CSA standards — compliance judgment AI cannot replace</li>
+          <li>Arcstone: subscription platform customer success certification — onboarding process, tenant configuration, manufacturing client change management</li>
+          <li>Yottaasys: VisionX manufacturing vertical calibration — automotive weld, semiconductor wafer, precision surface quality defect signatures</li>
+          <li>SK Robotics: agent-to-AMR integration training — configuring DFleet to receive + execute instructions from arc.ops agent layer</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>Wixom DMC activated as external upskilling program for customers — manufacturers send engineers + supervisors for Human-Led AI-Accelerated certification — named revenue stream</li>
+          <li>Cross-entity leadership rotation launched — future leaders from SKI, ATS India, T&AS, Arcstone rotate for 90-day placements building integrated group perspective</li>
+        </ul></td>
+      </tr>
+      <tr>
+        <td class="td-focus">Go-to-Market<br>+ Partners</td>
+        <td class="td-03"><ul>
+          <li>SKI account managers initiate pilot subscription conversations with Nissan purchasing, Hirata engineering, Detroit Chassis operations — present 90-day value proof</li>
+          <li>Arcstone identifies top 5 arc.ops installed base customers closest to subscription upgrade — schedule discovery calls</li>
+          <li>Agree unified group narrative: one positioning statement, one visual identity, one digital front door briefed to agency</li>
+          <li>Define 3 subscription tiers: Base $3–5K/plant/month · Growth $6–10K · Premium $10–18K</li>
+        </ul></td>
+        <td class="td-49"><ul>
+          <li>Target 10 signed subscription customers by month 9: 3 SKI OEM relationships + 3 Arcstone arc.ops base + 2 ATS India Ford/GM/ASSA ABLOY + 2 Arcstone SEA Singapore/Indonesia</li>
+          <li>Unified group website live — single digital front door, individual entity pages accessible from it</li>
+          <li>Human-Led AI-Accelerated campaign launched: SKI LinkedIn + Arcstone digital + Yottaasys marketing — unified message, coordinated calendar</li>
+          <li>ATS India defence + aerospace relationships activated for AS9100D-certified platform vertical — two prospect conversations initiated</li>
+        </ul></td>
+        <td class="td-10"><ul>
+          <li>Present platform to Nissan, Ford, GM as supplier standardization solution — one OEM endorsement = 20–50 supplier subscriptions automatically</li>
+          <li>Activate Arcstone become-a-partner + find-a-partner programs as formal reseller channel: MES integrators and ERP consultants who cannot build this stack but can resell it</li>
+          <li>T&AS direct North America digital presence live — own channel for CAD, GIS, structural, documentation services independent of SKI referral</li>
+          <li>Target 100+ subscription customers across US + SEA markets by month 18</li>
+        </ul></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="banner"><strong>The goal is not to digitize what we already do.</strong> It is to build the platform that manufacturers cannot operate without — and own every layer of it.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SLIDE 5 — Three Verticals, KPIs & Success at 18 Months
+══════════════════════════════════════════════════════════ -->
+<div id="slide5" class="slide">
+  <div class="slide-header">
+    <h1>Three Verticals · KPIs · What Success Looks Like at 18 Months</h1>
+    <p>Placeholder — subject to leadership alignment on entity structure, P&amp;L ownership and legal framework</p>
+  </div>
+
+  <!-- ── VERTICAL CARDS ── -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+
+    <!-- V1 -->
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:#4A88D4"></div>
+        <div class="co-header-text">
+          <h2 style="color:#4A88D4;font-size:1.1rem">Vertical 1 · Intelligent Manufacturing Platform</h2>
+          <div class="role">Subscription SaaS — the operating system manufacturers cannot function without</div>
+          <div class="meta">Led by: Arcstone (arc.ops, arc.net, arc.green, arc.studio, arc.ai) · Enabled by: SKI engineering knowledge + Yottaasys perception + SK Robotics physical execution + SK Spares fulfilment</div>
+        </div>
+      </div>
+      <div class="co-body" style="padding:1rem 1.25rem">
+        <div class="fn-box" style="margin-bottom:.75rem">
+          <h4>What it does</h4>
+          <ul>
+            <li>Multi-tenant Agentic AI platform — MES Intelligence, Predictive Quality, Supply Chain + ESG agents</li>
+            <li>ERP stays as system of record — platform becomes system of intelligence on top</li>
+            <li>Subscription tiers: Base $3–5K · Growth $6–10K · Premium $10–18K per plant per month</li>
+            <li>arc.studio self-serve — customers configure their own micro-agents</li>
+          </ul>
+        </div>
+        <div class="fn-box">
+          <h4>Entities contributing</h4>
+          <div class="tags" style="margin-top:.4rem">
+            <span class="tag" style="color:#4A88D4;border-color:#4A88D4">Arcstone (platform backbone)</span>
+            <span class="tag" style="color:#E05A2B;border-color:#E05A2B">SKI (domain knowledge)</span>
+            <span class="tag" style="color:#4A88D4;border-color:#4A88D4">Yottaasys (perception)</span>
+            <span class="tag" style="color:#E8A020;border-color:#E8A020">SK Robotics (physical execution)</span>
+            <span class="tag" style="color:#C18A15;border-color:#C18A15">SK Spares (fulfilment)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- V2 -->
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:#E05A2B"></div>
+        <div class="co-header-text">
+          <h2 style="color:#E05A2B;font-size:1.1rem">Vertical 2 · Engineering &amp; Manufacturing Services</h2>
+          <div class="role">Project + outcome-based services — the human expertise that makes AI trustworthy</div>
+          <div class="meta">Led by: SKI (US OEM relationships, CLS, civil/GIS) + ATS India (engineering execution, defence, AS9100D) · Premium knowledge layer that no AI can replicate alone</div>
+        </div>
+      </div>
+      <div class="co-body" style="padding:1rem 1.25rem">
+        <div class="fn-box" style="margin-bottom:.75rem">
+          <h4>What it does</h4>
+          <ul>
+            <li>SPM + BIW + FEA + automation design + robot simulation for OEM clients</li>
+            <li>Contract launch support + buy-off for Nissan, Hirata, Magna, Ford, GM</li>
+            <li>Defence and aerospace engineering (AS9100D) — ballistic range, aero SPMs</li>
+            <li>Civil + GIS + fall protection + structural for North America</li>
+            <li>Physical manufacturing: precision components, SPM machines, automatic assembly</li>
+          </ul>
+        </div>
+        <div class="fn-box">
+          <h4>Entities contributing</h4>
+          <div class="tags" style="margin-top:.4rem">
+            <span class="tag" style="color:#E05A2B;border-color:#E05A2B">SKI (US OEM + civil)</span>
+            <span class="tag" style="color:#D84040;border-color:#D84040">ATS India (engineering + defence)</span>
+            <span class="tag" style="color:#C18A15;border-color:#C18A15">SK Spares (aftermarket)</span>
+            <span class="tag" style="color:#E8A020;border-color:#E8A020">SK Robotics (AMR deployment)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- V3 -->
+    <div class="co-card">
+      <div class="co-header">
+        <div class="co-accent" style="background:#5EA620"></div>
+        <div class="co-header-text">
+          <h2 style="color:#5EA620;font-size:1.1rem">Vertical 3 · Knowledge Work &amp; Documentation Services</h2>
+          <div class="role">AI-supervised delivery — faster, consistent, outcome-based, India cost economics</div>
+          <div class="meta">Led by: T&AS Designtech · Cloudifai as new company website · Deep specialization in Hollow Metal/Hardware + North America CAD/BIM/GIS + structural/substation · Pure knowledge-work model</div>
+        </div>
+      </div>
+      <div class="co-body" style="padding:1rem 1.25rem">
+        <div class="fn-box" style="margin-bottom:.75rem">
+          <h4>What it does</h4>
+          <ul>
+            <li>Order processing + management for Hollow Metal/Hardware manufacturers (40% cost reduction)</li>
+            <li>CAD/BIM/structural drawings for North America construction and manufacturing</li>
+            <li>GIS/LiDAR/DTM/DSM/DEM for urban, utilities, agriculture, environment</li>
+            <li>Structural + substation + fall protection design (US/Canadian/Indian codes)</li>
+            <li>Product manuals, catalogues, manufacturing process plans</li>
+            <li>AI-assisted generation model — engineers supervise, validate, coordinate</li>
+          </ul>
+        </div>
+        <div class="fn-box">
+          <h4>Entities contributing</h4>
+          <div class="tags" style="margin-top:.4rem">
+            <span class="tag" style="color:#5EA620;border-color:#5EA620">T&AS Designtech (core delivery)</span>
+            <span class="tag" style="color:#E05A2B;border-color:#E05A2B">SKI (product manuals, process plans)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KPI TABLE ── -->
+  <div style="margin-bottom:1rem">
+    <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.6rem">KPIs — What We Measure</div>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden">
+      <thead>
+        <tr>
+          <th style="background:#0D1C2E;color:var(--muted);padding:.6rem .9rem;font-size:11px;text-align:left;width:160px;text-transform:uppercase;letter-spacing:.06em">KPI Category</th>
+          <th style="background:#112240;color:#85B7EB;padding:.6rem .9rem;font-size:11px;text-align:left">Vertical 1 · Platform</th>
+          <th style="background:#201408;color:#F0997B;padding:.6rem .9rem;font-size:11px;text-align:left">Vertical 2 · Engineering &amp; Mfg Services</th>
+          <th style="background:#0E1E08;color:#9FE1CB;padding:.6rem .9rem;font-size:11px;text-align:left">Vertical 3 · Knowledge Work</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background:var(--surface);font-weight:600;font-size:11.5px;padding:.65rem .9rem;border-top:1px solid var(--border)">Revenue</td>
+          <td style="background:#060E1A;color:#B5D4F4;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">MRR (Monthly Recurring Revenue) per plant<br>Number of paying subscription customers<br>Revenue per tier (Base / Growth / Premium)<br>Churn rate &lt;5% per month</td>
+          <td style="background:#100A04;color:#F5C4B3;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">Project revenue + CLS contract value<br>Revenue per OEM client relationship<br>% revenue from repeat vs new clients<br>Gross margin per project type</td>
+          <td style="background:#080E04;color:#9FE1CB;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">Revenue per deliverable (outcome-based)<br>% revenue from outcome-based vs time-billed<br>Revenue from direct NA clients (not via SKI)<br>Revenue per T&AS engineer per month</td>
+        </tr>
+        <tr>
+          <td style="background:var(--card);font-weight:600;font-size:11.5px;padding:.65rem .9rem;border-top:1px solid var(--border)">Customers</td>
+          <td style="background:#040810;color:#B5D4F4;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">Subscription customers (target: 10 by month 9, 100+ by month 18)<br>OEM standardization deals (1 OEM = 20–50 subscriptions)<br>Customer NPS &gt;50<br>Average contract value growth QoQ</td>
+          <td style="background:#0C0804;color:#F5C4B3;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">Active OEM relationships retained<br>New OEM/Tier-1 clients acquired<br>Defence/aerospace clients (ATS India AS9100D vertical)<br>CLS launch success rate (on-time, in-spec)</td>
+          <td style="background:#060A04;color:#9FE1CB;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">Hollow Metal/Hardware clients retained<br>New North America CAD/GIS/structural clients<br>Client satisfaction score per deliverable<br>Repeat order rate &gt;70%</td>
+        </tr>
+        <tr>
+          <td style="background:var(--surface);font-weight:600;font-size:11.5px;padding:.65rem .9rem;border-top:1px solid var(--border)">Operations</td>
+          <td style="background:#060E1A;color:#B5D4F4;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">Agents deployed per customer (target: 3 by month 9)<br>Agent uptime &gt;99.5%<br>Customer onboarding time &lt;5 days<br>ERP adapters live (target: 8 by month 9)</td>
+          <td style="background:#100A04;color:#F5C4B3;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">FEA iteration cycle time reduction (target: 40%)<br>Unplanned downtime reduction at client sites (target: 35–55%)<br>SK Spares 24hr fulfilment SLA compliance &gt;95%<br>SK Robotics AMR dispatch success rate</td>
+          <td style="background:#080E04;color:#9FE1CB;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">% drawings produced via AI-assisted generation<br>Turnaround time per drawing type vs baseline<br>Order processing error rate &lt;1%<br>Cost per deliverable vs time-billed baseline</td>
+        </tr>
+        <tr>
+          <td style="background:var(--card);font-weight:600;font-size:11.5px;padding:.65rem .9rem;border-top:1px solid var(--border)">People</td>
+          <td style="background:#040810;color:#B5D4F4;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">AI Champions active per entity (7 total)<br>Platform-certified Arcstone customer success team<br>arc.ai/arc.studio tenant configs completed without engineering support</td>
+          <td style="background:#0C0804;color:#F5C4B3;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">SKI engineers using AI-assisted FEA daily<br>ATS India PLC documentation time saved per project<br>Engineers upskilled: AI tool supervision competency certified<br>Wixom DMC customer training sessions delivered</td>
+          <td style="background:#060A04;color:#9FE1CB;font-size:11px;padding:.65rem .9rem;border-top:1px solid var(--border);line-height:1.5">T&AS engineers: AI supervision competency certified<br>% of T&AS team on outcome-based work vs time-billed<br>North America code compliance review errors = 0<br>GIS team: ESG interpretation deliverables per month</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS AT 18 MONTHS ── -->
+  <div style="margin-bottom:1rem">
+    <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.6rem">What Success Looks Like at 18 Months</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.75rem">
+
+      <div class="fn-box" style="border-left:3px solid #4A88D4">
+        <h4 style="color:#85B7EB">Vertical 1 · Platform</h4>
+        <ul>
+          <li>100+ manufacturers on subscription across US + SEA</li>
+          <li>3 agents live and generating measurable ROI per customer</li>
+          <li>1 OEM partnership standardizing platform across their supplier base</li>
+          <li>ESG auto-report generating revenue as standalone SKU</li>
+          <li>arc.studio self-serve: customers building their own agents</li>
+          <li>MRR exceeds $500K/month — platform revenue &gt;30% of group revenue</li>
+        </ul>
+      </div>
+
+      <div class="fn-box" style="border-left:3px solid #E05A2B">
+        <h4 style="color:#F0997B">Vertical 2 · Engineering &amp; Mfg Services</h4>
+        <ul>
+          <li>SKI engineering knowledge formally structured as platform premium layer — generating licensing revenue</li>
+          <li>ATS India AS9100D defence vertical: 2+ defence manufacturer clients on the AI agent platform</li>
+          <li>SK Robotics standard platform tier: AMRs dispatched by agents across 20+ customer sites</li>
+          <li>SK Spares 24hr predictive fulfilment SLA live for all platform subscribers</li>
+          <li>40% reduction in SKI+ATS engineering iteration cycle times measured and documented</li>
+          <li>Unplanned downtime reduction of 35–55% demonstrated at 3+ pilot sites</li>
+        </ul>
+      </div>
+
+      <div class="fn-box" style="border-left:3px solid #5EA620">
+        <h4 style="color:#9FE1CB">Vertical 3 · Knowledge Work</h4>
+        <ul>
+          <li>T&AS: 30%+ of revenue from outcome-based pricing — not time-billed hours</li>
+          <li>AI-assisted CAD generation live on North America structural projects — engineers supervise, not draft</li>
+          <li>T&AS GIS team delivering ESG environmental traceability reports as a subscription service</li>
+          <li>First direct North America client acquired through T&AS own digital channel — not via SKI referral</li>
+          <li>T&AS becomes structured knowledge engine feeding agent context for Vertical 1 platform</li>
+          <li>Order processing: same headcount handling 2× volume via AI-assisted workflows</li>
+        </ul>
+      </div>
+
+      <div class="fn-box" style="border-left:3px solid var(--muted)">
+        <h4 style="color:var(--white)">Group-Level Success Markers</h4>
+        <ul>
+          <li>Unified group brand and digital front door live — one story, seven capabilities</li>
+          <li>Human-Led AI-Accelerated positioning recognized in manufacturing AI market</li>
+          <li>Wixom DMC generating external training revenue — manufacturers send their teams</li>
+          <li>Cross-entity leadership rotation completed first cohort — integrated group perspective</li>
+          <li>All 7 AI Champions active with measurable adoption metrics per entity</li>
+          <li>Group total revenue grown 25–40% above pre-transformation baseline — platform + services mix</li>
+          <li>No single entity's revenue dependent on a single client relationship (&lt;20% concentration)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="banner">
+    <strong>The three verticals are not separate companies — they are three revenue streams from one integrated group.</strong>
+    Platform subscription creates recurring revenue. Engineering &amp; Manufacturing Services creates OEM trust and domain depth. Knowledge Work creates cost-effective delivery velocity.
+    Together they are defensible. Separately any one of them is replicable.
+  </div>
+</div>
+
+<script>
+  function showSlide(n, btn) {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('slide'+n).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showCo(id, tab) {
+    document.querySelectorAll('.company-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.ctab').forEach(t => {
+      t.classList.remove('active');
+      t.style.borderBottomColor = 'transparent';
+    });
+    document.getElementById('co-'+id).classList.add('active');
+    tab.classList.add('active');
+    const colors = { ski:'var(--ski)', arc:'var(--arc)', yot:'var(--yot)', rob:'var(--rob)', spa:'var(--spa)', ats:'var(--ats)', tas:'var(--tas)' };
+    tab.style.borderBottomColor = colors[id] || 'var(--white)';
+  }
+</script>
+</body>
+</html>
