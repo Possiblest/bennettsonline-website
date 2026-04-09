@@ -1376,21 +1376,31 @@
 <style>
 .rm-wrap { border:1px solid var(--border); border-radius:10px; overflow:hidden; }
 .rm-section {
-  display:flex; align-items:center; gap:14px;
-  padding:9px 14px 9px 12px;
-  background:#081420;
+  display:grid;
+  grid-template-columns:190px 1fr 1fr 1fr;
+  background:#060f1c;
   border-top:2px solid var(--border2);
   border-bottom:1px solid var(--border2);
 }
-.rm-section-accent { width:3px; height:32px; border-radius:2px; flex-shrink:0; }
-.rm-section-label { display:flex; flex-direction:column; justify-content:center; }
+.rm-section-label {
+  padding:10px 12px;
+  border-right:2px solid var(--border2);
+  display:flex; flex-direction:column; justify-content:center;
+  min-width:0;
+}
 .rm-section-num { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:.16em; color:var(--dim); text-transform:uppercase; margin-bottom:2px; }
 .rm-section-name { font-family:'Syne',sans-serif; font-size:13px; font-weight:800; color:var(--white); }
-.rm-section-desc { font-size:10px; color:var(--muted); margin-top:1px; }
-.rm-section-badges { display:flex; gap:6px; margin-left:auto; flex-wrap:wrap; justify-content:flex-end; }
-.rm-badge { display:inline-block; font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:.08em; padding:3px 10px; border-radius:3px; text-transform:uppercase; white-space:nowrap; }
-.rm-badge-1 { background:rgba(224,90,43,0.15); color:#E05A2B; border:1px solid rgba(224,90,43,0.3); }
-.rm-badge-2 { background:rgba(74,136,212,0.15); color:#4A88D4; border:1px solid rgba(74,136,212,0.3); }
+.rm-section-desc { font-size:10px; color:var(--muted); margin-top:2px; line-height:1.4; }
+.rm-section-ph {
+  padding:10px 12px;
+  border-right:1px solid var(--border2);
+  display:flex; align-items:center; justify-content:center;
+  min-width:0;
+}
+.rm-section-ph:last-child { border-right:none; }
+.rm-badge { display:inline-block; font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:.08em; padding:4px 12px; border-radius:3px; text-transform:uppercase; white-space:nowrap; }
+.rm-badge-1 { background:rgba(224,90,43,0.15); color:#E05A2B; border:1px solid rgba(224,90,43,0.35); }
+.rm-badge-2 { background:rgba(74,136,212,0.15); color:#4A88D4; border:1px solid rgba(74,136,212,0.35); }
 .rm-badge-3 { background:rgba(27,175,122,0.15); color:#1BAF7A; border:1px solid rgba(27,175,122,0.3); }
 .rm-row { display:grid; grid-template-columns:190px 1fr 1fr 1fr; border-top:1px solid var(--border); background:var(--surface); }
 .rm-row:nth-child(even) { background:var(--card); }
@@ -1432,6 +1442,7 @@
   .rm-phase-bar,.rm-section,.rm-row{grid-template-columns:1fr;}
   .rm-row-label,.rm-cell,.rm-phase-blank,.rm-ph,.rm-section-label,.rm-section-ph,.rm-culture-cell{border-right:none;border-bottom:1px solid var(--border);}
   .rm-val-grid{grid-template-columns:1fr;}
+  .rm-section-label{border-right:none;}
 }
 </style>
 
@@ -1445,17 +1456,10 @@
 
   <!-- ── SECTION 1: FOUNDATION ── -->
   <div class="rm-section">
-    <div class="rm-section-accent" style="background:var(--yot)"></div>
-    <div class="rm-section-label">
-      <div class="rm-section-num">01</div>
-      <div class="rm-section-name">Foundation</div>
-      <div class="rm-section-desc">Build the capability stack to stay ahead of the AI curve</div>
-    </div>
-    <div class="rm-section-badges">
-      <span class="rm-badge rm-badge-1">Activate what exists</span>
-      <span class="rm-badge rm-badge-2">Productise into platform</span>
-      <span class="rm-badge rm-badge-3">Lead the category</span>
-    </div>
+    <div class="rm-section-label"><div class="rm-section-num">01</div><div class="rm-section-name">Foundation</div><div class="rm-section-desc">Build the capability stack to stay ahead of the AI curve</div></div>
+    <div class="rm-section-ph" style="background:rgba(224,90,43,0.05)"><span class="rm-badge rm-badge-1">Activate what exists</span></div>
+    <div class="rm-section-ph" style="background:rgba(74,136,212,0.05)"><span class="rm-badge rm-badge-2">Productise into platform</span></div>
+    <div class="rm-section-ph" style="background:rgba(27,175,122,0.05)"><span class="rm-badge rm-badge-3">Lead the category</span></div>
   </div>
 
   <!-- 1A Products -->
@@ -1620,17 +1624,10 @@
 
   <!-- ── SECTION 2: OPERATIONS ── -->
   <div class="rm-section">
-    <div class="rm-section-accent" style="background:var(--ski)"></div>
-    <div class="rm-section-label">
-      <div class="rm-section-num">02</div>
-      <div class="rm-section-name">Operations</div>
-      <div class="rm-section-desc">Strengthen client value, grow with AI, and win large-margin contracts</div>
-    </div>
-    <div class="rm-section-badges">
-      <span class="rm-badge rm-badge-1">Strengthen client value</span>
-      <span class="rm-badge rm-badge-2">Grow with AI</span>
-      <span class="rm-badge rm-badge-3">Win large-margin contracts</span>
-    </div>
+    <div class="rm-section-label"><div class="rm-section-num">02</div><div class="rm-section-name">Operations</div><div class="rm-section-desc">Strengthen client value, grow with AI, and win large-margin contracts</div></div>
+    <div class="rm-section-ph" style="background:rgba(224,90,43,0.05)"><span class="rm-badge rm-badge-1">Strengthen client value</span></div>
+    <div class="rm-section-ph" style="background:rgba(74,136,212,0.05)"><span class="rm-badge rm-badge-2">Grow with AI</span></div>
+    <div class="rm-section-ph" style="background:rgba(27,175,122,0.05)"><span class="rm-badge rm-badge-3">Win large-margin contracts</span></div>
   </div>
 
   <!-- 2A Retain -->
@@ -1738,17 +1735,10 @@
 
   <!-- ── SECTION 3: PEOPLE & CULTURE ── -->
   <div class="rm-section">
-    <div class="rm-section-accent" style="background:var(--arc)"></div>
-    <div class="rm-section-label">
-      <div class="rm-section-num">03</div>
-      <div class="rm-section-name">People &amp; Culture</div>
-      <div class="rm-section-desc">Integrity · Ownership · Respect · Curiosity · Customer Centricity</div>
-    </div>
-    <div class="rm-section-badges">
-      <span class="rm-badge rm-badge-1">Establish + own it</span>
-      <span class="rm-badge rm-badge-2">Upskill + align</span>
-      <span class="rm-badge rm-badge-3">Culture as moat</span>
-    </div>
+    <div class="rm-section-label"><div class="rm-section-num">03</div><div class="rm-section-name">People &amp; Culture</div><div class="rm-section-desc">Integrity · Ownership · Respect · Curiosity · Customer Centricity</div></div>
+    <div class="rm-section-ph" style="background:rgba(224,90,43,0.05)"><span class="rm-badge rm-badge-1">Establish + own it</span></div>
+    <div class="rm-section-ph" style="background:rgba(74,136,212,0.05)"><span class="rm-badge rm-badge-2">Upskill + align</span></div>
+    <div class="rm-section-ph" style="background:rgba(27,175,122,0.05)"><span class="rm-badge rm-badge-3">Culture as moat</span></div>
   </div>
 
   <div class="rm-row" style="align-items:stretch">
