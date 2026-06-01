@@ -1,2014 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Human-Led, AI-Accelerated · Unified Ecosystem</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bennetts Online — Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg:       #08121F;
-    --surface:  #0D1C2E;
-    --card:     #112236;
-    --border:   #1E3450;
-    --border2:  #253F60;
-    --white:    #F0F4FA;
-    --muted:    #7A90A8;
-    --dim:      #3E5570;
+    :root {
+      --ink: #0e0e0e;
+      --ink-mid: #3a3a3a;
+      --ink-muted: #7a7a7a;
+      --ink-faint: #b8b4ac;
+      --surface: #f7f5f1;
+      --surface-warm: #efecea;
+      --rule: #d4d0c8;
+      --accent: #1a1a2e;
+      --accent-gold: #c8a96e;
+      --accent-gold-light: #e8d5a8;
+    }
 
-    --ski:   #E05A2B;
-    --arc:   #1BAF7A;
-    --yot:   #4A88D4;
-    --rob:   #E8A020;
-    --spa:   #C18A15;
-    --ats:   #D84040;
-    --tas:   #5EA620;
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
 
-    --col-a: #2A5C3A;
-    --col-b: #5C2A1A;
-    --col-c: #1A2E5C;
-  }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--surface);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Subtle grid texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--white);
-    min-height: 100vh;
-    font-size: 14px;
-    line-height: 1.5;
-  }
+    /* Top edge accent */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-gold) 50%, var(--accent) 100%);
+      z-index: 10;
+    }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(8,18,31,0.96);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    padding: 0 1rem;
-    display: flex; align-items: center; gap: 0;
-    overflow-x: auto;
-  }
-  nav .brand {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px; font-weight: 700;
-    color: var(--muted);
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    padding-right: 1.5rem;
-    border-right: 1px solid var(--border);
-    margin-right: 0.5rem;
-  }
-  .slide-btn {
-    background: none; border: none; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 500;
-    color: var(--muted);
-    padding: 14px 16px;
-    white-space: nowrap;
-    transition: color .2s;
-    border-bottom: 2px solid transparent;
-  }
-  .slide-btn:hover { color: var(--white); }
-  .slide-btn.active { color: var(--white); border-bottom-color: var(--white); }
+    /* Main layout */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 40px 60px;
+      min-height: 100vh;
+    }
 
-  /* ── SLIDE PANELS ── */
-  .slide { display: none; padding: 1.5rem 1rem 3rem; max-width: 1200px; margin: 0 auto; }
-  .slide.active { display: block; }
+    .inner {
+      max-width: 680px;
+      width: 100%;
+    }
 
-  .slide-header { margin-bottom: 1.5rem; }
-  .slide-header h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    font-weight: 800; line-height: 1.1;
-    margin-bottom: .4rem;
-  }
-  .slide-header p { color: var(--muted); font-size: 13px; }
+    /* Wordmark */
+    .wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 6px;
+    }
 
-  /* ── COMPANY TABS (SLIDE 1) ── */
-  .company-tabs {
-    display: flex; gap: 4px;
-    overflow-x: auto; padding-bottom: 2px;
-    margin-bottom: 1.25rem;
-    scrollbar-width: none;
-  }
-  .company-tabs::-webkit-scrollbar { display: none; }
-  .ctab {
-    flex-shrink: 0;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px 8px 0 0;
-    padding: 8px 14px;
-    cursor: pointer;
-    font-size: 11px; font-weight: 600;
-    color: var(--muted);
-    transition: all .2s;
-    border-bottom: 2px solid transparent;
-  }
-  .ctab:hover { color: var(--white); background: var(--surface); }
-  .ctab.active { color: var(--white); background: var(--surface); border-bottom-color: var(--white); }
+    .wordmark span {
+      color: var(--accent-gold);
+    }
 
-  .company-panel { display: none; }
-  .company-panel.active { display: block; }
+    .domain {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
 
-  /* ── COMPANY DETAIL CARD ── */
-  .co-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .co-header {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: flex-start; gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .co-accent { width: 4px; border-radius: 4px; flex-shrink: 0; align-self: stretch; min-height: 40px; }
-  .co-header-text { flex: 1; min-width: 200px; }
-  .co-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.25rem; font-weight: 700;
-    margin-bottom: .2rem;
-  }
-  .co-header .role { color: var(--muted); font-size: 12px; margin-bottom: .5rem; }
-  .co-header .meta { color: var(--dim); font-size: 11px; line-height: 1.6; }
+    /* Divider */
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
 
-  .co-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(90px,1fr));
-    border-bottom: 1px solid var(--border);
-  }
-  .co-stat {
-    padding: .75rem 1rem;
-    text-align: center;
-    border-right: 1px solid var(--border);
-  }
-  .co-stat:last-child { border-right: none; }
-  .co-stat .val {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.3rem; font-weight: 700;
-    display: block; margin-bottom: 2px;
-  }
-  .co-stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
 
-  .co-body { padding: 1.25rem 1.5rem; }
-  .fn-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-    gap: .75rem;
-    margin-bottom: 1rem;
-  }
-  .fn-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: .9rem 1rem;
-  }
-  .fn-box h4 {
-    font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .08em;
-    color: var(--muted);
-    margin-bottom: .6rem;
-  }
-  .fn-box ul { padding-left: 1rem; }
-  .fn-box li { font-size: 12px; color: var(--white); margin-bottom: 3px; line-height: 1.4; }
+    .rule-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+    }
 
-  .co-tags-section { margin-bottom: .75rem; }
-  .co-tags-section h4 {
-    font-size: 10px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .1em;
-    color: var(--muted); margin-bottom: .5rem;
-  }
-  .tags { display: flex; flex-wrap: wrap; gap: .35rem; }
-  .tag {
-    font-size: 10px; font-weight: 500;
-    padding: 3px 9px; border-radius: 20px;
-    border: 1px solid; white-space: nowrap;
-  }
+    /* Headline */
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 3.5vw, 30px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
 
-  /* ── SLIDE 2 FUNCTION ROWS ── */
-  .fn-rows { display: flex; flex-direction: column; gap: 0; }
-  .fn-row {
-    display: flex; align-items: flex-start;
-    border: 1px solid var(--border);
-    border-top: none;
-    background: var(--surface);
-    transition: background .15s;
-  }
-  .fn-row:first-child { border-top: 1px solid var(--border); border-radius: 10px 10px 0 0; }
-  .fn-row:last-child { border-radius: 0 0 10px 10px; }
-  .fn-row:nth-child(even) { background: var(--card); }
-  .fn-row:hover { background: #142638; }
-  .fn-num {
-    width: 36px; flex-shrink: 0;
-    font-family: 'Syne', sans-serif;
-    font-size: 11px; font-weight: 700;
-    color: var(--dim);
-    padding: 1rem .5rem;
-    text-align: center;
-    border-right: 1px solid var(--border);
-    align-self: stretch;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .fn-info {
-    width: 300px; flex-shrink: 0;
-    padding: .8rem .9rem;
-    border-right: 1px solid var(--border);
-  }
-  .fn-info h3 { font-size: 13px; font-weight: 600; margin-bottom: .3rem; }
-  .fn-info p { font-size: 11px; color: var(--muted); line-height: 1.4; }
-  .fn-pills {
-    flex: 1; padding: .6rem .75rem;
-    display: flex; flex-wrap: wrap; gap: .25rem; align-content: center;
-  }
-  .epill {
-    font-size: 10px; font-weight: 600;
-    padding: 3px 9px; border-radius: 20px;
-    color: #fff; white-space: nowrap;
-  }
+    .subline {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 52px;
+    }
 
-  /* ── SLIDE 2 BOARD GRID ── */
-  .s2-row { display:flex; align-items:stretch; border-bottom:1px solid var(--border); background:var(--surface); }
-  .s2-row.s2-alt { background:var(--card); }
-  .s2-row.s2-header { background:var(--bg); }
-  .s2-fn { width:36px; flex-shrink:0; font-family:'Syne',sans-serif; font-size:10px; font-weight:700; color:var(--dim); display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); padding:4px; }
-  .s2-fn-head { font-size:9px; color:var(--dim); }
-  .s2-label { width:300px; flex-shrink:0; padding:.65rem .9rem; border-right:1px solid var(--border); display:flex; flex-direction:column; justify-content:center; }
-  .s2-label strong { font-size:12.5px; font-weight:600; color:var(--white); display:block; margin-bottom:2px; }
-  .s2-label em { font-size:10px; color:var(--dim); font-style:normal; }
-  .s2-label-head strong { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
-  .s2-cell { flex:1; display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); min-height:52px; }
-  .s2-cell:last-child { border-right:none; }
-  .s2-cell-head { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
-  .s2-cell-head span { font-size:9px; font-weight:700; }
-  .s2-on { background:color-mix(in srgb, var(--c) 18%, transparent); }
-  .s2-on::after { content:''; width:12px; height:12px; border-radius:50%; background:var(--c); display:block; }
-  .s2-off { background:transparent; }
-  .s2-off::after { content:''; width:8px; height:8px; border-radius:50%; border:1px solid var(--border); display:block; opacity:.4; }
+    /* Countdown */
+    .countdown-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+    }
 
-  /* ── LEGEND BAR ── */
-  .legend-bar {
-    display: flex; flex-wrap: wrap; gap: .4rem;
-    margin-bottom: 1rem;
-    padding: .75rem 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-  }
-  .leg-item { display: flex; align-items: center; gap: 5px; }
-  .leg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-  .leg-label { font-size: 11px; color: var(--muted); }
+    .countdown {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 52px;
+    }
 
-  /* ── SLIDE 3 MATRIX ── */
-  .matrix { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
-  .matrix th {
-    padding: .6rem .8rem;
-    font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .08em;
-    text-align: left;
-  }
-  .matrix td {
-    padding: .7rem .8rem;
-    vertical-align: top;
-    font-size: 11.5px;
-    line-height: 1.5;
-    border-top: 1px solid var(--border);
-  }
-  .matrix tr:hover td { background: rgba(255,255,255,.02); }
-  .matrix td ul { padding-left: .9rem; }
-  .matrix td li { margin-bottom: 3px; }
-  .th-fn  { background: #0E1E30; color: var(--muted); width: 120px; }
-  .th-a   { background: #112A1A; color: #5DCAA5; }
-  .th-b   { background: #2A1610; color: #F0997B; }
-  .th-c   { background: #0A1830; color: #85B7EB; }
-  .td-fn  { background: var(--surface); font-weight: 600; font-size: 12px; }
-  .td-a   { background: #0A1A10; color: #9FE1CB; }
-  .td-b   { background: #1A0E08; color: #F5C4B3; }
-  .td-c   { background: #060E1A; color: #B5D4F4; }
+    .cd-block {
+      text-align: center;
+    }
 
-  /* ── SLIDE 4 ROADMAP ── */
-  .roadmap { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
-  .roadmap th {
-    padding: .65rem .8rem;
-    font-size: 11px; font-weight: 700;
-    text-align: left;
-  }
-  .roadmap td {
-    padding: .7rem .8rem;
-    vertical-align: top;
-    font-size: 11px;
-    line-height: 1.5;
-    border-top: 1px solid var(--border);
-  }
-  .roadmap td ul { padding-left: .9rem; }
-  .roadmap td li { margin-bottom: 3px; }
-  .roadmap tr:hover td { background: rgba(255,255,255,.02); }
-  .th-focus { background: #0E1E30; color: var(--muted); width: 110px; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
-  .th-03 { background: #112A1A; color: #5DCAA5; }
-  .th-49 { background: #2A2010; color: #FAC775; }
-  .th-10 { background: #0A1830; color: #85B7EB; }
-  .td-focus { background: var(--surface); font-weight: 600; font-size: 11.5px; }
-  .td-03 { background: #080E0A; color: #9FE1CB; }
-  .td-49 { background: #110E04; color: #FAC775; }
-  .td-10 { background: #040810; color: #B5D4F4; }
+    .cd-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      display: block;
+      min-width: 60px;
+    }
 
-  /* ── ACCENT STRIP ROW ── */
-  .row-accent { width: 5px; padding: 0 !important; }
+    .cd-unit {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-top: 8px;
+      display: block;
+    }
 
-  /* ── BOTTOM BANNER ── */
-  .banner {
-    margin-top: 1.5rem;
-    padding: .9rem 1.25rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-  }
-  .banner strong { color: var(--white); }
+    .cd-sep {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: var(--rule);
+      align-self: flex-start;
+      padding-top: 4px;
+      line-height: 1;
+    }
 
-  /* ── SWIPE HINT (mobile only) ── */
-  .s2-hint {
-    font-size:10px; color:var(--muted);
-    text-align:center; padding:.3rem 0 .5rem;
-    letter-spacing:.04em;
-  }
-  @media (max-width:600px) {
-    .s2-hint { display:block !important; }
-  }
+    /* Notify form */
+    .notify-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 700px) {
-    .fn-info { width: 140px; }
-    .matrix th, .matrix td { font-size: 10.5px; padding: .5rem .5rem; }
-    .roadmap th, .roadmap td { font-size: 10px; padding: .5rem .5rem; }
-    .th-fn, .th-focus { width: 80px; }
-    .co-header h2 { font-size: 1.1rem; }
-    nav .brand { display: none; }
-  }
-  @media (max-width: 500px) {
-    .fn-row { flex-direction: column; }
-    .fn-info { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
-    .fn-num { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: .4rem; }
-  }
-</style>
+    .form-row {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      background: white;
+      transition: border-color 0.2s;
+    }
+
+    .form-row:focus-within {
+      border-color: var(--accent-gold);
+    }
+
+    .form-row input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      padding: 12px 16px;
+      min-width: 0;
+    }
+
+    .form-row input::placeholder {
+      color: var(--ink-faint);
+    }
+
+    .form-row button {
+      border: none;
+      border-left: 1px solid var(--rule);
+      background: var(--accent);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .form-row button:hover {
+      background: var(--accent-gold);
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-top: 10px;
+    }
+
+    .success-msg {
+      display: none;
+      font-size: 13px;
+      color: var(--accent-gold);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 10px 0;
+    }
+
+    /* Bottom footer */
+    .footer {
+      position: relative;
+      z-index: 1;
+      padding: 24px 40px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-left {
+      font-size: 12px;
+      color: var(--ink-faint);
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-right a {
+      font-size: 12px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Decorative corner mark */
+    .corner-mark {
+      position: fixed;
+      bottom: 64px;
+      right: 48px;
+      opacity: 0.06;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      .wrapper { padding: 80px 24px 48px; }
+      .countdown { gap: 16px; }
+      .cd-num { min-width: 44px; font-size: 36px; }
+      .footer { padding: 20px 24px; flex-direction: column; align-items: flex-start; }
+      .corner-mark { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <div class="brand">SKI · Ecosystem</div>
-  <button class="slide-btn active" onclick="showSlide(1,this)">1 · Companies</button>
-  <button class="slide-btn" onclick="showSlide(2,this)">2 · Functions</button>
-  <button class="slide-btn" onclick="showSlide(3,this)">3 · Transformation</button>
-  <button class="slide-btn" onclick="showSlide(4,this)">4 · Roadmap</button>
-  <button class="slide-btn" onclick="showSlide(5,this)">5 · Pillars &amp; KPIs</button>
-</nav>
+  <div class="top-bar"></div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 1 — Seven Companies
-══════════════════════════════════════════════════════════ -->
-<div id="slide1" class="slide active">
-  <div class="slide-header">
-    <h1>A Unified Ecosystem of Complementary Capabilities</h1>
-    <p>Seven specialized entities · One integrated group · Built to serve manufacturing from design through delivery</p>
-  </div>
+  <!-- Decorative large B -->
+  <svg class="corner-mark" width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <text x="0" y="280" font-family="'Playfair Display', serif" font-size="320" font-weight="400" fill="#0e0e0e">B</text>
+  </svg>
 
-  <!-- Company tabs -->
-  <div class="company-tabs">
-    <div class="ctab active"   style="border-bottom-color:var(--ski)" onclick="showCo('ski',this)">SK International</div>
-    <div class="ctab" style="--c:var(--arc)" onclick="showCo('arc',this)">Arcstone</div>
-    <div class="ctab" onclick="showCo('yot',this)">Yottaasys</div>
-    <div class="ctab" onclick="showCo('rob',this)">SK Robotics</div>
-    <div class="ctab" onclick="showCo('spa',this)">SK Spares</div>
-    <div class="ctab" onclick="showCo('ats',this)">ATS India</div>
-    <div class="ctab" onclick="showCo('tas',this)">T&AS Designtech</div>
-  </div>
+  <main class="wrapper">
+    <div class="inner">
 
-  <!-- ── SKI ── -->
-  <div id="co-ski" class="company-panel active">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--ski)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--ski)">SK International</h2>
-          <div class="role">Engineering Brain + OEM Trust Layer — US Market Face · skinternational.us · Wixom, Michigan USA</div>
-          <div class="meta">CEO: Kishan Ravikondala · ISO 9001 · NMSDC · Michigan Manufacturers Assoc. · Parent of ATS India (affiliate) + SK Robotics + SK Spares · Arcstone + Yottaasys partnership</div>
+      <div class="wordmark">Bennetts<span>Online</span></div>
+      <div class="domain">bennettsonline.org</div>
+
+      <div class="rule">
+        <div class="rule-line"></div>
+        <div class="rule-dot"></div>
+        <div class="rule-line"></div>
+      </div>
+
+      <div class="headline">Something considered is on its way.</div>
+      <p class="subline">
+        We're crafting a thoughtful online presence. Built with purpose, launched when ready.
+        In the meantime, leave your email and we'll reach out when the doors open.
+      </p>
+
+      <div class="countdown-label">Estimated Launch</div>
+      <div class="countdown" id="countdown">
+        <div class="cd-block">
+          <span class="cd-num" id="cd-days">—</span>
+          <span class="cd-unit">Days</span>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-hours">—</span>
+          <span class="cd-unit">Hours</span>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-mins">—</span>
+          <span class="cd-unit">Minutes</span>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-secs">—</span>
+          <span class="cd-unit">Seconds</span>
         </div>
       </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--ski)">19+</span><span class="lbl">Years</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--ski)">600+</span><span class="lbl">Projects</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--ski)">50+</span><span class="lbl">Clients</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--ski)">15</span><span class="lbl">Awards</span></div>
+
+      <div class="notify-label">Notify Me</div>
+      <div class="form-row" id="form-row">
+        <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email" />
+        <button onclick="handleNotify()">Notify me</button>
       </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>Engineering Services</h4>
-            <ul>
-              <li>SPM design for engine lines</li>
-              <li>Transmission lines, BIW lines</li>
-              <li>Robot &amp; factory throughput simulation</li>
-              <li>General automation production line design</li>
-              <li>2D/3D design components</li>
-              <li>Finite element &amp; analysis</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Manufacturing Services</h4>
-            <ul>
-              <li>SPM machines (oiler head, leak test stations)</li>
-              <li>Precision components (high-tolerance machining)</li>
-              <li>Contract manufacturing</li>
-              <li>Low volume production</li>
-              <li>Commercial material handling (Flex MIG Weld Cell)</li>
-              <li>Automatic assembly (Motor Latch, Omron PLC)</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Civil Engineering</h4>
-            <ul>
-              <li>Fall protection (500+ US projects)</li>
-              <li>Structural design (CAD/Revit/SolidWorks)</li>
-              <li>CAD services</li>
-              <li>Electrical &amp; utility (GIS, Grid, AUD/SDS)</li>
-              <li>SAP/Salesforce implementations</li>
-              <li>GIS/LiDAR/3D mapping</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Custom Mfg &amp; Eng + IT + CLS</h4>
-            <ul>
-              <li>Order processing &amp; mgmt (door hardware)</li>
-              <li>Product manuals &amp; catalogues</li>
-              <li>Manufacturing process plans</li>
-              <li>IT staffing &amp; consulting</li>
-              <li>AI/ML solutions</li>
-              <li>Contract launch support + build/buy-off</li>
-            </ul>
-          </div>
-        </div>
-        <div class="co-tags-section">
-          <h4>Key Clients</h4>
-          <div class="tags">
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Nissan USA</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Hirata Corp</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Magna</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Martinrea</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">DuPont</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Comau</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Detroit Chassis</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Samsung</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">ASSA ABLOY</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">RedViking</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">Delta Sigma</span>
-            <span class="tag" style="color:#E8A0A0;border-color:#8B3030">New Standard Corp</span>
-          </div>
-        </div>
-        <div class="co-tags-section">
-          <h4>Unique to SKI (not in ATS or T&AS)</h4>
-          <div class="tags">
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Civil/structural engineering</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Fall protection (US)</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Contract launch support (CLS)</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Buy-off services</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Digital Factory initiative</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">AI/ML solutions offering</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Arcstone partnership</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">Yottaasys partnership</span>
-            <span class="tag" style="color:var(--ski);border-color:var(--ski)">NMSDC certified</span>
-          </div>
-        </div>
-      </div>
+      <div class="form-note" id="form-note">No spam. One message when we launch.</div>
+      <div class="success-msg" id="success-msg">✓ You're on the list. We'll be in touch.</div>
+
     </div>
-  </div>
+  </main>
 
-  <!-- ── ARCSTONE ── -->
-  <div id="co-arc" class="company-panel">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--arc)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--arc)">Arcstone</h2>
-          <div class="role">Operational + Data Backbone — US and Southeast Asia · arcstone.co</div>
-          <div class="meta">CEO: Willson Deng · Industries: Precision Eng, FMCG, Mining, Semiconductor, Plastics, Biomedical · Detroit (NA HQ) + Singapore (SEA HQ) + Indonesia + Vietnam + Malaysia + Thailand + China</div>
-        </div>
-      </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--arc)">20</span><span class="lbl">arc.ops modules</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--arc)">5</span><span class="lbl">Product platforms</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--arc)">6</span><span class="lbl">Industry verticals</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--arc)">Global</span><span class="lbl">US + SEA presence</span></div>
-      </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>arc.ops — MES (20 modules)</h4>
-            <ul>
-              <li>arc.quire: machine connectivity (OPC-UA, MQTT)</li>
-              <li>arc.flow: process orchestration + trigger events</li>
-              <li>Scheduler+, Workflow Builder+, Checklist+</li>
-              <li>Inventory+, Equipment Maintenance, Document Mgr</li>
-              <li>Bundles: OEE, Predictive Maintenance (ML), SPC</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>arc.net + arc.green</h4>
-            <ul>
-              <li>arc.net: live supplier production floor visibility</li>
-              <li>Multi-tier supply chain tracing + certifications</li>
-              <li>Buy / Plan / Optimize / Vantage modules</li>
-              <li>arc.green: IIoT sustainability + ESG scoring</li>
-              <li>Energy optimization + product lifecycle mgmt</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>arc.studio + arc.ai</h4>
-            <ul>
-              <li>arc.studio: unlimited enterprise app creation</li>
-              <li>Shop floor to top floor configuration layer</li>
-              <li>arc.ai: AI Control Tower for enterprise</li>
-              <li>Controlled AI governance + workforce enablement</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Industry Verticals + Partners</h4>
-            <ul>
-              <li>Precision Engineering · FMCG · Mining</li>
-              <li>Semiconductor · Plastics · Biomedical</li>
-              <li>System integration partners: Siemens, S+T, AVIEXT</li>
-              <li>Partner program: become/find a partner</li>
-              <li>Wixom Digital Manufacturing Collaboration Center (with SKI)</li>
-            </ul>
-          </div>
-        </div>
-        <div class="co-tags-section">
-          <h4>Unique Strategic Role</h4>
-          <div class="tags">
-            <span class="tag" style="color:var(--arc);border-color:var(--arc)">Operational data backbone across value stream</span>
-            <span class="tag" style="color:var(--arc);border-color:var(--arc)">MES + supply chain + ESG in one stack</span>
-            <span class="tag" style="color:var(--arc);border-color:var(--arc)">arc.studio as tenant config layer</span>
-            <span class="tag" style="color:var(--arc);border-color:var(--arc)">Global SEA reach</span>
-            <span class="tag" style="color:var(--arc);border-color:var(--arc)">Wixom DMC co-investment with SKI</span>
-          </div>
-        </div>
-      </div>
+  <footer class="footer">
+    <div class="footer-left">© 2026 Bennetts Online. All rights reserved.</div>
+    <div class="footer-right">
+      <a href="mailto:hello@bennettsonline.org">Contact</a>
+      <a href="#">Privacy</a>
     </div>
-  </div>
+  </footer>
 
-  <!-- ── YOTTAASYS ── -->
-  <div id="co-yot" class="company-panel">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--yot)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--yot)">Yottaasys</h2>
-          <div class="role">Human Intelligence + Perception Layer — Michigan · yottaasys.com · Farmington Hills MI</div>
-          <div class="meta">Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="026f6376762c72706d61766d70427b6d76766363717b712c616d6f">[email&#160;protected]</a> · AI-powered human intelligence platform · Three product suite · 98.7% accuracy · Deploys on existing hardware in minutes</div>
-        </div>
-      </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--yot)">98.7%</span><span class="lbl">Vision &amp; voice accuracy</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--yot)">3</span><span class="lbl">Core AI products</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--yot)">8+</span><span class="lbl">Solution verticals</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--yot)">Min</span><span class="lbl">Deploy time</span></div>
-      </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>VisionX — AI Vision Layer</h4>
-            <ul>
-              <li>Facial recognition (98.7% accuracy)</li>
-              <li>Facial coding (expressions → emotions)</li>
-              <li>Object &amp; defect detection (production QC)</li>
-              <li>Eye tracking + gaze analysis</li>
-              <li>Contactless 2-step authentication</li>
-              <li>Works on existing webcams/cameras</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>EmotionX — Emotion Intelligence</h4>
-            <ul>
-              <li>Eye + gaze + facial coding + voice combined</li>
-              <li>Video ad analysis (emotional ROAS)</li>
-              <li>UX testing (product/interface emotions)</li>
-              <li>Focus group replacement via AI</li>
-              <li>Micro-expressions + A/B emotion testing</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>VoiceX — Conversational Intelligence</h4>
-            <ul>
-              <li>Beyond STT: tone + sentiment + emotion</li>
-              <li>98.7% multilingual accuracy</li>
-              <li>Tone-Check, Right Sentiment, Emotional Quotient</li>
-              <li>Voice Assist (real-time telesales coaching)</li>
-              <li>Meeting transcriptions (multi-speaker)</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Cross-Product Solutions</h4>
-            <ul>
-              <li>Employee compliance (facial + gaze + voice)</li>
-              <li>Behavioral risk pattern tracking</li>
-              <li>Attention measurement (remote workforce)</li>
-              <li>Process optimization (QC, ingredient counting)</li>
-              <li>Presentation attack detection</li>
-              <li>Device detection (data security)</li>
-            </ul>
-          </div>
-        </div>
-        <div class="co-tags-section">
-          <h4>Unique Strategic Role</h4>
-          <div class="tags">
-            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Only perception layer in the ecosystem</span>
-            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Sees + hears + feels what machines cannot</span>
-            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Works on existing webcams</span>
-            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Minutes to deploy</span>
-            <span class="tag" style="color:var(--yot);border-color:var(--yot)">Industry 5.0 human intelligence thesis</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script>
+    // Countdown — target date: Sep 1, 2026
+    const target = new Date('2026-09-01T00:00:00');
 
-  <!-- ── SK ROBOTICS ── -->
-  <div id="co-rob" class="company-panel">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--rob)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--rob)">SK Robotics</h2>
-          <div class="role">Physical Autonomous Workforce · skrobotics.us · Parent: SK International</div>
-          <div class="meta">Autonomous Mobile Robots (AMR) · Integration-first design philosophy · Serving automotive, logistics, packaging, general manufacturing · "Built to Move You Forward"</div>
-        </div>
-      </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--rob)">3</span><span class="lbl">AMR product series</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--rob)">300kg–2T</span><span class="lbl">Payload range</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--rob)">2</span><span class="lbl">Software platforms</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--rob)">WMS+ERP</span><span class="lbl">Native integration</span></div>
-      </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>AMR Hardware Products</h4>
-            <ul>
-              <li><strong>Lidar Series:</strong> L300, L300e, L500, L500e, L1000, L1500, L2000 — 300kg to 2,000kg payload</li>
-              <li><strong>Guided Series:</strong> G300, G300e, G300l — guided path navigation</li>
-              <li><strong>Autonomous Forklift:</strong> F1200, F1600, F2000 — 1,200kg to 2,000kg lift capacity</li>
-              <li>Integration with cobots, conveyors, existing systems</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Software Platforms</h4>
-            <ul>
-              <li><strong>DFleet:</strong> AMR traffic control + task management</li>
-              <li>WMS + ERP native integration</li>
-              <li>Dynamic path management for high-density environments</li>
-              <li>Optimization reports (utilization, accuracy)</li>
-              <li><strong>NavWiz:</strong> Control + navigation software</li>
-              <li>Complex environment routing + real-time optimization</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Agentic AI Integration Points</h4>
-            <ul>
-              <li>arc.ops Inventory+ → low stock → DFleet dispatches AMR</li>
-              <li>Scheduler+ job sequencing → NavWiz route optimization</li>
-              <li>VisionX floor monitoring + AMR path awareness</li>
-              <li>arc.quire machine state → AMR material staging</li>
-              <li>Cobot collaboration — human + robot + AMR</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Unique Strategic Role</h4>
-            <ul>
-              <li>Physical autonomous execution layer of the platform</li>
-              <li>Agents can dispatch robots without human instruction on routine moves</li>
-              <li>Only entity in group that makes something physically move</li>
-              <li>DFleet already speaks ERP data language — zero integration friction</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    function pad(n) { return String(n).padStart(2, '0'); }
 
-  <!-- ── SK SPARES ── -->
-  <div id="co-spa" class="company-panel">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--spa)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--spa)">SK Spares</h2>
-          <div class="role">Aftermarket + Machine Continuity Layer · sk-spares.us · An SK International Company</div>
-          <div class="meta">ISO 9001:2015 · Full Quality Lab + CMM certification · Dual facility: USA + India · Dedicated spare parts brand for manufacturing clients</div>
-        </div>
-      </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--spa)">24hr</span><span class="lbl">Critical SPM parts</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--spa)">1–1K</span><span class="lbl">Short-run production</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--spa)">CMM</span><span class="lbl">Certified inspection</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--spa)">2</span><span class="lbl">Facilities: USA + India</span></div>
-      </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>Core Capability</h4>
-            <ul>
-              <li>Precision spare parts crafted with CNC milling and turning</li>
-              <li>Short-run production: 1 piece to 1,000 pieces</li>
-              <li>Single parts AND full assemblies</li>
-              <li>CMM (Coordinate Measuring Machine) inspection on every part</li>
-              <li>Leverages both USA facility and India facility for cost optimization</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Service Differentiators</h4>
-            <ul>
-              <li>Critical SPM parts made as fast as 24 hours</li>
-              <li>Custom solutions: customer provides drawings OR reverse engineering</li>
-              <li>Reverse engineering capability — produces drawing for future reference</li>
-              <li>Specializes in parts for Special Purpose Machinery</li>
-              <li>Fabrication services alongside machining</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Agentic AI Integration Points</h4>
-            <ul>
-              <li>Predictive maintenance agent triggers SK Spares order before failure</li>
-              <li>arc.ops Equipment Maintenance module feeds demand signal</li>
-              <li>24hr turnaround = same-shift resolution</li>
-              <li>Reverse engineering = no drawing needed from customer</li>
-              <li>Dual-facility = cost optimization by part complexity</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Unique Strategic Role</h4>
-            <ul>
-              <li>Aftermarket revenue engine — keeps machines running after SKI and ATS build them</li>
-              <li>Closes the predictive loop: detect → predict → source → deliver</li>
-              <li>No competitor replicates 24hr CMM-certified SPM parts with reverse engineering</li>
-              <li>Platform tier: subscription customers get 24hr SLA as a named guarantee</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    function tick() {
+      const now = new Date();
+      const diff = target - now;
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent  = pad(d);
+      document.getElementById('cd-hours').textContent = pad(h);
+      document.getElementById('cd-mins').textContent  = pad(m);
+      document.getElementById('cd-secs').textContent  = pad(s);
+    }
 
-  <!-- ── ATS INDIA ── -->
-  <div id="co-ats" class="company-panel">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--ats)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--ats)">ATS India</h2>
-          <div class="role">India Engineering + Defence Execution — AV SK Affiliate · atsindia.net · Hyderabad, India</div>
-          <div class="meta">AS9100D aerospace certified · ANAB accredited · Est. 2011 · Clients: Ford, GM, Stellantis, ASSA ABLOY, Nissan, Indian Tier-1, Aero &amp; Defence · Parent: SKInternational.us</div>
-        </div>
-      </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--ats)">15</span><span class="lbl">Years</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--ats)">650+</span><span class="lbl">Projects</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--ats)">65+</span><span class="lbl">Clients</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--ats)">AS9100D</span><span class="lbl">Aerospace cert</span></div>
-      </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>Engineering Services</h4>
-            <ul>
-              <li>Assembly line automation (seat track, engine, transmission)</li>
-              <li>SPMs — Leak Test Station Design for engine</li>
-              <li>BIW engineering (Revolver Tooling, OEMs + Tier1)</li>
-              <li>2D/3D with robot simulation · design engineering</li>
-              <li>General engineering: 2D-3D CAD, drawing packages, BOM</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Manufacturing Services</h4>
-            <ul>
-              <li>Automated assembly &amp; quality testing (Motor Latch, Omron PLC)</li>
-              <li>Precision machining (large batch, high tolerance)</li>
-              <li>Fabrication: MS, Stainless Steel, Aluminum</li>
-              <li>SPMs for transmission gearboxes (major car manufacturer)</li>
-              <li>Rust-resistant fabrications</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Defence (Unique to ATS)</h4>
-            <ul>
-              <li>Ballistic Range Defence Equipment</li>
-              <li>Stab Resist Test Equipment (bulletproof vest)</li>
-              <li>Drop Test Equipment (backing material evaluation)</li>
-              <li>Gun Mounting Stand (firearms positioning)</li>
-              <li>Light Screen Stand (bullet velocity measurement)</li>
-              <li>Head Foam/Clay Box Stand · Defence R&amp;D + law enforcement partnerships</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Software Automation</h4>
-            <ul>
-              <li>LabView, Siemens, Allen Bradley, Omron, Schneider</li>
-              <li>Electrical engineering — fluid schematics, BOM</li>
-              <li>Advanced robot + process simulation with FMEA</li>
-              <li>SK Robotics AMR (DFleet + NavWiz) — shared subsidiary</li>
-            </ul>
-          </div>
-        </div>
-        <div class="co-tags-section">
-          <h4>Unique to ATS (not in SKI or T&AS)</h4>
-          <div class="tags">
-            <span class="tag" style="color:var(--ats);border-color:var(--ats)">Ballistic range defence equipment</span>
-            <span class="tag" style="color:var(--ats);border-color:var(--ats)">AS9100D aerospace certification</span>
-            <span class="tag" style="color:var(--ats);border-color:var(--ats)">LabView/Siemens/Allen Bradley software dev</span>
-            <span class="tag" style="color:var(--ats);border-color:var(--ats)">SK Robotics AMR (DFleet + NavWiz)</span>
-            <span class="tag" style="color:var(--ats);border-color:var(--ats)">Impact/orbital/radial/roller forming</span>
-            <span class="tag" style="color:var(--ats);border-color:var(--ats)">C&amp;B Machinery partnership</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    tick();
+    setInterval(tick, 1000);
 
-  <!-- ── T&AS ── -->
-  <div id="co-tas" class="company-panel">
-    <div class="co-card">
-      <div class="co-header">
-        <div class="co-accent" style="background:var(--tas)"></div>
-        <div class="co-header-text">
-          <h2 style="color:var(--tas)">T&AS Designtech</h2>
-          <div class="role">India Knowledge Work + Documentation Engine · tasengg.com · cloudifai.com · Hyderabad, India</div>
-          <div class="meta">ISO 9001:2015 · TÜV India · NABCB · IAF certified · Michigan MSDC partner · "Completely self-reliant and IT enabled" · Cloudifai = new company website development environment</div>
-        </div>
-      </div>
-      <div class="co-stats">
-        <div class="co-stat"><span class="val" style="color:var(--tas)">ISO</span><span class="lbl">9001:2015</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--tas)">TÜV</span><span class="lbl">India certified</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--tas)">NABCB</span><span class="lbl">Accredited</span></div>
-        <div class="co-stat"><span class="val" style="color:var(--tas)">MSDC</span><span class="lbl">Michigan partner</span></div>
-      </div>
-      <div class="co-body">
-        <div class="fn-grid">
-          <div class="fn-box">
-            <h4>Order Processing &amp; Management</h4>
-            <ul>
-              <li>Full lifecycle: intake → production → delivery</li>
-              <li>Technical + non-technical order processing</li>
-              <li>Hollow Metal/Hardware industries specialist</li>
-              <li>40% process cost reduction · 8–24hr turnaround</li>
-              <li>Deploys/trains teams on customer's own platforms</li>
-              <li>Quotations, pricing, billing, shipping management</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>CAD + GIS Services</h4>
-            <ul>
-              <li>2D-to-3D conversion · BIM · interference detection</li>
-              <li>Rebar schedules · precast piece tickets</li>
-              <li>Steel fabrication drawings for North America</li>
-              <li>GIS: Base, Urban, Topographical, Hydrological, Cadastral, Thematic Maps</li>
-              <li>3D Mapping: DTM/DSM/DEM · LiDAR processing</li>
-              <li>Orthophotos for 2D mapping in multiple resolutions</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>General Engineering</h4>
-            <ul>
-              <li>Manufacturing drawings creation/review/update</li>
-              <li>Product manuals &amp; catalogues</li>
-              <li>Machine design (custom machines, platforms, robotics)</li>
-              <li>Mechanical design and analysis</li>
-              <li>Process and project layout design</li>
-              <li>Interior design and layout planning</li>
-            </ul>
-          </div>
-          <div class="fn-box">
-            <h4>Structural + Civil + Utility</h4>
-            <ul>
-              <li>Civil &amp; Structural CAD (US/Canadian/Indian codes)</li>
-              <li>Steel shop drawings (connections, bolt layouts, weld symbols)</li>
-              <li>Fall protection systems (interior, exterior, custom)</li>
-              <li>Structural engineering (foundations, retaining walls, steel structures)</li>
-              <li>Utility &amp; substation design (AUD/SDS, SAP/Salesforce)</li>
-              <li>Architectural services for modular manufacturing</li>
-            </ul>
-          </div>
-        </div>
-        <div class="co-tags-section">
-          <h4>T&AS Value Proposition (from "Why T&AS")</h4>
-          <div class="tags">
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Cost + quality advantage</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Critical time zone advantage</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Dedicated account manager</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">40% process cost reduction</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">8–24hr order turnaround</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Hollow Metal/Hardware specialist</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">North America construction drawings</span>
-            <span class="tag" style="color:var(--tas);border-color:var(--tas)">Pure knowledge-work model (no physical mfg)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    // Notify
+    function handleNotify() {
+      const val = document.getElementById('email-input').value.trim();
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!re.test(val)) {
+        document.getElementById('email-input').style.borderBottom = '2px solid #c8a96e';
+        document.getElementById('email-input').focus();
+        return;
+      }
+      document.getElementById('form-row').style.display = 'none';
+      document.getElementById('form-note').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }
 
-  <div class="banner">Collectively serving: <strong>Automotive · Aerospace · Defence · Precision Engineering · FMCG · Mining · Semiconductor · Biomedical · Civil Infrastructure · Logistics</strong></div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 2 — Functions (Board-Ready Visual)
-══════════════════════════════════════════════════════════ -->
-<div id="slide2" class="slide">
-  <div class="slide-header">
-    <h1>One Integrated Business — Mapped by Function</h1>
-    <p>Seven functions · Seven entities · Stronger together than any single competitor</p>
-  </div>
-
-  <div style="display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-bottom:1.1rem;padding:.55rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;align-items:center">
-    <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)">Entities →</span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--ski)"></span><span class="leg-label">SK International</span></span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--arc)"></span><span class="leg-label">Arcstone</span></span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--yot)"></span><span class="leg-label">Yottaasys</span></span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--rob)"></span><span class="leg-label">SK Robotics</span></span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--spa)"></span><span class="leg-label">SK Spares</span></span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--ats)"></span><span class="leg-label">ATS India</span></span>
-    <span class="leg-item"><span class="leg-dot" style="background:var(--tas)"></span><span class="leg-label">T&AS Designtech</span></span>
-  </div>
-
-  <div style="display:none" id="s2-hint" class="s2-hint">← swipe to see all entities →</div>
-
-  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--border)">
-  <div style="min-width:540px;overflow:hidden">
-    <!-- Column headers -->
-    <div class="s2-row s2-header">
-      <div class="s2-fn s2-fn-head"></div>
-      <div class="s2-label s2-label-head"><strong>Function</strong></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--ski);background:color-mix(in srgb,var(--ski) 12%,var(--bg))"><span style="color:var(--ski)">SKI</span></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--arc);background:color-mix(in srgb,var(--arc) 12%,var(--bg))"><span style="color:var(--arc)">ARC</span></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--yot);background:color-mix(in srgb,var(--yot) 12%,var(--bg))"><span style="color:var(--yot)">YOT</span></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--rob);background:color-mix(in srgb,var(--rob) 12%,var(--bg))"><span style="color:var(--rob)">ROB</span></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--spa);background:color-mix(in srgb,var(--spa) 12%,var(--bg))"><span style="color:var(--spa)">SPA</span></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--ats);background:color-mix(in srgb,var(--ats) 12%,var(--bg))"><span style="color:var(--ats)">ATS</span></div>
-      <div class="s2-cell s2-cell-head" style="--c:var(--tas);background:color-mix(in srgb,var(--tas) 12%,var(--bg))"><span style="color:var(--tas)">TAS</span></div>
-    </div>
-    <!-- 01 Platform + Product -->
-    <div class="s2-row">
-      <div class="s2-fn">01</div>
-      <div class="s2-label"><strong>Platform + Product</strong><em>MES · supply chain · ESG · AI agents · AMR · spares</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--arc)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--yot)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--rob)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--spa)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--ats)"></div>
-      <div class="s2-cell s2-off"></div>
-    </div>
-    <!-- 02 Engineering -->
-    <div class="s2-row s2-alt">
-      <div class="s2-fn">02</div>
-      <div class="s2-label"><strong>Engineering + AI Integration</strong><em>SPM · BIW · FEA · simulation · CAD · GIS · PLC · AS9100D</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-on" style="--c:var(--ats)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--tas)"></div>
-    </div>
-    <!-- 03 Manufacturing -->
-    <div class="s2-row">
-      <div class="s2-fn">03</div>
-      <div class="s2-label"><strong>Manufacturing + Physical AI</strong><em>Precision mfg · assembly · AMR fleet · VisionX line monitoring</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--arc)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--yot)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--rob)"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-on" style="--c:var(--ats)"></div>
-      <div class="s2-cell s2-off"></div>
-    </div>
-    <!-- 04 Aftermarket -->
-    <div class="s2-row s2-alt">
-      <div class="s2-fn">04</div>
-      <div class="s2-label"><strong>Aftermarket · Supply Chain · ESG</strong><em>24hr CMM parts · arc.net · arc.green · Scope 3 · GIS baselines</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--arc)"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-on" style="--c:var(--spa)"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-on" style="--c:var(--tas)"></div>
-    </div>
-    <!-- 05 Knowledge Work -->
-    <div class="s2-row">
-      <div class="s2-fn">05</div>
-      <div class="s2-label"><strong>Knowledge Work + Documentation</strong><em>Order processing · CAD/BIM · GIS/LiDAR · structural · manuals</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-on" style="--c:var(--tas)"></div>
-    </div>
-    <!-- 06 People -->
-    <div class="s2-row s2-alt">
-      <div class="s2-fn">06</div>
-      <div class="s2-label"><strong>People + Upskilling</strong><em>AI literacy · domain expertise · judgment · culture · Wixom DMC</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--arc)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--yot)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--rob)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--spa)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--ats)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--tas)"></div>
-    </div>
-    <!-- 07 GTM -->
-    <div class="s2-row" style="border-bottom:none">
-      <div class="s2-fn">07</div>
-      <div class="s2-label"><strong>Go-to-Market + Partnerships</strong><em>OEM relationships · SEA offices · reseller program · brand</em></div>
-      <div class="s2-cell s2-on" style="--c:var(--ski)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--arc)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--yot)"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-off"></div>
-      <div class="s2-cell s2-on" style="--c:var(--ats)"></div>
-      <div class="s2-cell s2-on" style="--c:var(--tas)"></div>
-    </div>
-  </div>
-  </div><!-- end scroll wrapper -->
-
-  <div class="banner"><strong>No single competitor replicates this breadth across all seven functions under one integrated group.</strong></div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 3 — Transformation
-══════════════════════════════════════════════════════════ -->
-<div id="slide3" class="slide">
-  <div class="slide-header">
-    <h1>The Strategic Shift — What Is Changing and Where We Lead</h1>
-    <p>Board-level view · Three pillars · Our differentiator vs the market · What AI is changing in each area</p>
-  </div>
-
-
-<!-- ── TRANSFORMATION TABLE: 3-col, sub-rows per pillar ── -->
-<style>
-/* Sub-row group headers */
-.tr-group-header td { background:#0A1828 !important; border-top:2px solid var(--border2) !important; }
-.tr-group-header .td-fn-group {
-  font-family:'Syne',sans-serif; font-size:13px; font-weight:800;
-  color:var(--white); padding:.65rem .8rem; vertical-align:middle;
-}
-.tr-group-header .td-group-span {
-  background:#0A1828; border-left:1px solid var(--border);
-  padding:.55rem .8rem;
-}
-.tr-group-header .group-kicker {
-  font-size:10px; font-weight:700; text-transform:uppercase;
-  letter-spacing:.1em; margin-bottom:4px;
-}
-.sub-fn { font-size:11px; font-weight:600; color:var(--white); display:block; margin-bottom:2px; }
-.sub-fn-sub { font-size:10px; color:var(--dim); }
-/* Phase-badge inline */
-.pbadge {
-  display:inline-block; font-size:9px; font-weight:700;
-  padding:1px 7px; border-radius:3px; text-transform:uppercase;
-  letter-spacing:.07em; vertical-align:middle; margin-right:3px;
-}
-
-/* Big-5 card grid for roadmap */
-.b5-phase {
-  border-bottom: 1px solid var(--border2);
-  margin-bottom:0;
-}
-.b5-phase-header {
-  display:flex; align-items:center; gap:14px;
-  padding:16px 16px 14px;
-  border-bottom:1px solid var(--border);
-  position:sticky; top:42px; z-index:9;
-  background:rgba(8,18,31,0.97);
-  backdrop-filter:blur(10px);
-}
-.b5-phase-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
-.b5-phase-title {
-  font-family:'Syne',sans-serif; font-size:16px; font-weight:800;
-  color:var(--white); letter-spacing:-.01em;
-}
-.b5-phase-sub { font-size:11px; color:var(--muted); margin-top:2px; }
-.b5-phase-badge {
-  margin-left:auto; font-family:'Syne',sans-serif; font-size:10px;
-  font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:.06em;
-}
-/* Phase colours */
-.ph1c { color:#C95F2A; } .ph1bg { background:rgba(201,95,42,0.08); border:1px solid rgba(201,95,42,0.3); }
-.ph2c { color:#3A7BD5; } .ph2bg { background:rgba(58,123,213,0.08); border:1px solid rgba(58,123,213,0.3); }
-.ph3c { color:#2BAE72; } .ph3bg { background:rgba(43,174,114,0.07); border:1px solid rgba(43,174,114,0.25); }
-
-.b5-grid {
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  border-bottom:1px solid var(--border);
-}
-.b5-card {
-  padding:18px 16px 16px;
-  border-right:1px solid var(--border);
-  display:flex; flex-direction:column;
-  transition:background .15s;
-}
-.b5-card:last-child { border-right:none; }
-.b5-card:hover { background: rgba(255,255,255,0.02); }
-.b5-num {
-  font-family:'Syne',sans-serif; font-size:10px; font-weight:700;
-  letter-spacing:.12em; color:var(--dim); margin-bottom:8px;
-}
-.b5-card-title {
-  font-family:'Syne',sans-serif; font-size:13px; font-weight:700;
-  color:var(--white); line-height:1.3; margin-bottom:10px;
-}
-.b5-card-body {
-  font-size:11.5px; color:var(--muted); line-height:1.65; flex:1;
-}
-.b5-card-body strong { color:var(--white); font-weight:500; }
-.b5-etags { display:flex; flex-wrap:wrap; gap:3px; margin-top:10px; }
-.b5-etag {
-  font-size:9px; font-weight:700; padding:2px 7px; border-radius:20px;
-  border:1px solid; letter-spacing:.06em;
-}
-.b5-outcome {
-  margin-top:10px; padding:7px 9px; border-radius:4px; font-size:11px; line-height:1.5;
-}
-.b5-out-label {
-  font-family:'Syne',sans-serif; font-size:9px; font-weight:700;
-  letter-spacing:.12em; text-transform:uppercase; margin-bottom:3px;
-}
-/* Culture cards */
-.culture-band {
-  padding:20px 16px;
-  border-bottom:1px solid var(--border);
-}
-.culture-band-title {
-  font-family:'Syne',sans-serif; font-size:10px; font-weight:700;
-  letter-spacing:.15em; text-transform:uppercase; margin-bottom:14px;
-}
-.values-grid {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px;
-}
-.val-card {
-  padding:12px 14px; border-radius:6px;
-  border:1px solid var(--border); background:var(--card);
-}
-.val-card-title {
-  font-family:'Syne',sans-serif; font-size:12px; font-weight:700;
-  color:var(--white); margin-bottom:4px; display:flex; align-items:center; gap:6px;
-}
-.val-card-body { font-size:11.5px; color:var(--muted); line-height:1.55; }
-.val-accent { width:3px; height:100%; border-radius:2px; flex-shrink:0; }
-
-/* Responsive */
-@media(max-width:1000px){
-  .b5-grid { grid-template-columns:repeat(3,1fr); }
-  .b5-card:nth-child(3){border-right:none;}
-}
-@media(max-width:680px){
-  .b5-grid { grid-template-columns:1fr 1fr; }
-  .b5-card:nth-child(2n){border-right:none;}
-}
-@media(max-width:400px){
-  .b5-grid { grid-template-columns:1fr; }
-  .b5-card { border-right:none; border-bottom:1px solid var(--border); }
-}
-</style>
-
-<div style="overflow-x:auto">
-<table class="matrix" style="min-width:620px">
-  <thead>
-    <tr>
-      <th class="th-fn" style="width:160px">Pillar / Function</th>
-      <th class="th-a">Our Differentiator vs Competition</th>
-      <th class="th-b">What AI Is Transforming in This Area</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <!-- ── PILLAR 1: FOUNDATION ── -->
-    <tr class="tr-group-header">
-      <td class="td-fn-group" style="background:#0D1C2E;border-left:3px solid #3A7BD5">
-        <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3A7BD5;display:block;margin-bottom:3px">Pillar 01</span>
-        Foundation
-      </td>
-      <td class="td-group-span" colspan="2" style="background:#0D1C2E;border-left:1px solid var(--border)">
-        <span class="group-kicker" style="color:#3A7BD5">Building capabilities that stay permanently ahead of the AI curve — products, platform, engineering, manufacturing, and services</span>
-      </td>
-    </tr>
-    <!-- 1a Products -->
-    <tr>
-      <td class="td-fn"><span class="sub-fn">1a · Products</span><span class="sub-fn-sub">Five named AI solutions — no dilution</span></td>
-      <td class="td-a"><ul>
-        <li>Only group combining MES + supply chain + perception AI + AMR + 24hr spare parts + AS9100D under one platform roof</li>
-        <li>No competitor has more than three of these capabilities simultaneously in one group</li>
-        <li>Five defined solutions: Quote-to-Estimate Automation, Production Scheduling Intelligence, Arc.AI Co-Worker, Vision Quality Intelligence, Predictive Spares Continuity</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Standalone point solutions (QC tools, MES, ESG, order management) are collapsing into integrated AI platforms — fragmented vendors are losing relevance</li>
-        <li>Subscription models are displacing project-fee models as the primary commercial structure in industrial software</li>
-        <li>Arc.studio + Arc.AI become the subscription operating system — platform revenue replaces project revenue across the group</li>
-      </ul></td>
-    </tr>
-    <!-- 1b Platform -->
-    <tr class="s2-alt">
-      <td class="td-fn"><span class="sub-fn">1b · Platform</span><span class="sub-fn-sub">Group AI data + governance spine</span></td>
-      <td class="td-a"><ul>
-        <li>Arc.studio provides a multi-tenant configuration layer — every client tenant is individually configured while sharing the same platform spine</li>
-        <li>Shared OCR/extraction services, ERP connectors, and workflow orchestration are group assets no single-entity competitor can replicate</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Industrial data is moving from siloed ERP/MES systems to unified AI-governed data layers — companies that don't own the data layer will lose platform leverage</li>
-        <li>AI governance — audit trails, human approval workflows, model observability — is becoming a board-level requirement in manufacturing</li>
-      </ul></td>
-    </tr>
-    <!-- 1c Engineering -->
-    <tr>
-      <td class="td-fn"><span class="sub-fn">1c · Engineering</span><span class="sub-fn-sub">19yr OEM depth + AS9100D + CAD/GIS</span></td>
-      <td class="td-a"><ul>
-        <li>19+ years of OEM engineering patterns (SKI) + AS9100D aerospace certification (ATS India) + CAD/BIM/GIS delivery at India cost with North America quality (T&AS) — no competitor combines all three</li>
-        <li>Domain knowledge structured as reusable AI training data is a platform asset that appreciates over time</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Routine FEA iterations, standard 2D-to-3D CAD conversion, and repetitive PLC documentation are being AI-accelerated — engineering hours shift to judgement, compliance, and novel problem-solving</li>
-        <li>Drawing OCR → BOM auto-population is eliminating manual estimation cycles — teams that don't automate face margin compression from competitors who do</li>
-      </ul></td>
-    </tr>
-    <!-- 1d Manufacturing -->
-    <tr class="s2-alt">
-      <td class="td-fn"><span class="sub-fn">1d · Manufacturing</span><span class="sub-fn-sub">Precision mfg + Physical AI loop</span></td>
-      <td class="td-a"><ul>
-        <li>Only group where an AI agent can detect a production issue, re-sequence arc.ops Scheduler+, dispatch a SK Robotics AMR for material movement, and alert SK Spares for a part — in one automated closed loop</li>
-        <li>650+ OEM-proven manufacturing projects across SKI and ATS India — real industrial credibility, not lab demos</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Manual production scheduling and supervisor-led material movement on predictable routes are being replaced by agent-dispatched automation</li>
-        <li>Physical AI (AMR + vision + sensing) is now deployable in brownfield factories on existing hardware — the barrier to automation has dropped significantly</li>
-      </ul></td>
-    </tr>
-    <!-- 1e Services / SaaS -->
-    <tr>
-      <td class="td-fn"><span class="sub-fn">1e · Services + SaaS</span><span class="sub-fn-sub">Subscription models — outcomes, not hours</span></td>
-      <td class="td-a"><ul>
-        <li>The group can offer three commercial models no single competitor can match: implementation + annual subscription, managed intelligence service, and outcome-linked subscription (uptime, scheduling efficiency, quote turnaround)</li>
-        <li>Selling industrial performance subscriptions — not AI projects — is the commercial model that creates compounding client dependence</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Time-billed engineering and knowledge-work contracts face structural margin compression as AI lowers delivery cost — outcome-based and subscription models are the durable alternative</li>
-        <li>Clients are shifting from buying implementation projects to buying guaranteed outcomes, with accountability on the vendor side</li>
-      </ul></td>
-    </tr>
-
-    <!-- ── PILLAR 2: OPERATIONS ── -->
-    <tr class="tr-group-header">
-      <td class="td-fn-group" style="background:#0D1C2E;border-left:3px solid #C95F2A">
-        <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C95F2A;display:block;margin-bottom:3px">Pillar 02</span>
-        Operations
-      </td>
-      <td class="td-group-span" colspan="2" style="background:#0D1C2E;border-left:1px solid var(--border)">
-        <span class="group-kicker" style="color:#C95F2A">Retain current clients, upsell with domain + AI, and win large-margin contracts through a structured go-to-market</span>
-      </td>
-    </tr>
-    <!-- 2a Retain -->
-    <tr class="s2-alt">
-      <td class="td-fn"><span class="sub-fn">2a · Retain Clients</span><span class="sub-fn-sub">Top-20 account programme</span></td>
-      <td class="td-a"><ul>
-        <li>100+ existing client relationships across SKI and ATS India — warm OEM relationships with Nissan, Hirata, Magna, Ford, GM, Stellantis, ASSA ABLOY — no cold outreach required for first expansion wave</li>
-        <li>ASSA ABLOY is a multi-entity relationship (SKI + T&AS) that can be elevated from operational vendor to intelligence partner — a multi-million dollar retention and expansion play</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Clients are shifting their vendor evaluation from "do you deliver on time?" to "do you improve our throughput, predictability, and decision speed?" — vendors who cannot answer this question are at risk</li>
-        <li>Platform entrenchment — embedding group workflows, dashboards, and AI outputs into client daily operations — is the most durable form of retention</li>
-      </ul></td>
-    </tr>
-    <!-- 2b Upsell -->
-    <tr>
-      <td class="td-fn"><span class="sub-fn">2b · Upsell with AI</span><span class="sub-fn-sub">Domain + AI cross-sell playbooks</span></td>
-      <td class="td-a"><ul>
-        <li>Three cross-sell playbooks: Engineering client → Estimation Automation + Scheduling + Spares Continuity. Manufacturing client → arc.ops OEE + VisionX QC + Predictive Spares. Knowledge-work client → Arc.AI + Document Automation + Conversational Dashboards</li>
-        <li>Yottaasys VisionX (98.7% accuracy, deploys on existing cameras) is the lowest-friction AI add-on in the group — no hardware investment required from the client</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>AI add-ons are moving from optional enhancements to expected baseline capabilities — clients who do not adopt quality vision, predictive maintenance, and scheduling intelligence face competitive disadvantage against peers who do</li>
-        <li>The most effective upsell is not selling new technology — it is unlocking deeper value in the platform the client already uses</li>
-      </ul></td>
-    </tr>
-    <!-- 2c Market Growth -->
-    <tr class="s2-alt">
-      <td class="td-fn"><span class="sub-fn">2c · Market Growth</span><span class="sub-fn-sub">Big-margin pursuits + GTM structure</span></td>
-      <td class="td-a"><ul>
-        <li>NMSDC (SKI) + Michigan MSDC (T&AS) supplier diversity certifications open large corporate and government procurement channels unavailable to non-certified competitors</li>
-        <li>Arcstone's live presence in Singapore, Indonesia, Vietnam, Malaysia, Thailand creates a built-in SEA market entry channel — no greenfield investment required</li>
-        <li>ATS India AS9100D + SK Robotics AMR = a credible defence logistics and aerospace automation play most competitors cannot assemble</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>Large industrial clients are consolidating vendor relationships — preferring fewer, more capable partners who can cover engineering + software + execution in one contract</li>
-        <li>GTM in industrial markets is shifting from relationship-led to outcome-led — the first conversation must be about client pain, not group capability</li>
-        <li>The group's current GTM is informal and understructured — formalising it with vertical pipeline owners and a Strategic Pursuits function is a revenue lever that requires no new capability investment</li>
-      </ul></td>
-    </tr>
-
-    <!-- ── PILLAR 3: PEOPLE & CULTURE ── -->
-    <tr class="tr-group-header">
-      <td class="td-fn-group" style="background:#0D1C2E;border-left:3px solid #2BAE72">
-        <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#2BAE72;display:block;margin-bottom:3px">Pillar 03</span>
-        People &amp; Culture
-      </td>
-      <td class="td-group-span" colspan="2" style="background:#0D1C2E;border-left:1px solid var(--border)">
-        <span class="group-kicker" style="color:#2BAE72">Values as the binding core — Integrity · Ownership · Respect · Curiosity · Customer Centricity</span>
-      </td>
-    </tr>
-    <!-- 3a Leadership + Culture -->
-    <tr>
-      <td class="td-fn"><span class="sub-fn">3a · Leadership + Culture</span><span class="sub-fn-sub">Ownership model · Group cadence</span></td>
-      <td class="td-a"><ul>
-        <li>Seven-entity group spanning OEM engineering, AS9100D aerospace, AI perception, autonomous robotics, precision manufacturing, and geospatial intelligence — human expertise no single competitor can assemble</li>
-        <li>Ownership culture — where individuals are accountable, self-driven, and proactive — is a structural advantage that compounds over time. Where this model is already being built, it should be documented and replicated across the group.</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>AI is removing repetitive work from every role — the value of human contribution is shifting from execution to judgement, client leadership, and problem framing</li>
-        <li>Culture that rewards curiosity (continuous learning, innovation, improvement) and customer centricity (value delivery, agility, partnership) will attract and retain the talent that AI cannot replace</li>
-        <li>Cross-entity silos are the biggest internal barrier to group leverage — culture and cadence are the solution, not restructuring</li>
-      </ul></td>
-    </tr>
-    <!-- 3b Talent + Upskilling -->
-    <tr class="s2-alt" style="border-bottom:none">
-      <td class="td-fn"><span class="sub-fn">3b · Talent + Upskilling</span><span class="sub-fn-sub">Three-tier AI programme · SME Fellows</span></td>
-      <td class="td-a"><ul>
-        <li>Tiered upskilling (AI literacy → domain-specific AI tools → AI strategy) delivered on Arc.AI gives the group an internal learning infrastructure no external competitor can match at the same cost</li>
-        <li>Designating Principal SMEs — engineers and domain experts who publish, speak, and mentor — creates market authority and makes the group's best people harder to poach</li>
-      </ul></td>
-      <td class="td-b"><ul>
-        <li>The shelf life of domain expertise without AI literacy is shortening — engineers who can validate and govern AI outputs will command a significant premium over those who cannot</li>
-        <li>The strongest talent retention strategy is making your best people visible and valued — not just compensated. Curiosity as a performance metric formalises this.</li>
-      </ul></td>
-    </tr>
-
-  </tbody>
-</table>
-</div>
-<div class="banner"><strong>Human-Led, AI-Accelerated.</strong> The strategic shift is already underway — the question is whether we lead it or respond to it.</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 4 — Roadmap
-══════════════════════════════════════════════════════════ -->
-<div id="slide4" class="slide">
-  <div class="slide-header">
-    <h1>Strategic Roadmap — Execution Sequence</h1>
-    <p>Foundation → Platform Build → Market Leadership · Crisp initiatives by phase</p>
-  </div>
-
-  <!-- NEW MATRIX ROADMAP -->
-<style>
-.rm-wrap { border:1px solid var(--border); border-radius:10px; overflow:hidden; }
-.rm-section {
-  display:grid;
-  grid-template-columns:190px 1fr 1fr 1fr;
-  background:#060f1c;
-  border-top:2px solid var(--border2);
-  border-bottom:1px solid var(--border2);
-}
-.rm-section-label {
-  padding:10px 12px;
-  border-right:2px solid var(--border2);
-  display:flex; flex-direction:column; justify-content:center;
-  min-width:0;
-}
-.rm-section-num { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:.16em; color:var(--dim); text-transform:uppercase; margin-bottom:2px; }
-.rm-section-name { font-family:'Syne',sans-serif; font-size:13px; font-weight:800; color:var(--white); }
-.rm-section-desc { font-size:10px; color:var(--muted); margin-top:2px; line-height:1.4; }
-.rm-section-ph {
-  padding:10px 12px;
-  border-right:1px solid var(--border2);
-  display:flex; align-items:center; justify-content:center;
-  min-width:0;
-}
-.rm-section-ph:last-child { border-right:none; }
-.rm-badge { display:inline-block; font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:.08em; padding:4px 12px; border-radius:3px; text-transform:uppercase; white-space:nowrap; }
-.rm-badge-1 { background:rgba(224,90,43,0.15); color:#E05A2B; border:1px solid rgba(224,90,43,0.35); }
-.rm-badge-2 { background:rgba(74,136,212,0.15); color:#4A88D4; border:1px solid rgba(74,136,212,0.35); }
-.rm-badge-3 { background:rgba(27,175,122,0.15); color:#1BAF7A; border:1px solid rgba(27,175,122,0.3); }
-.rm-row { display:grid; grid-template-columns:190px 1fr 1fr 1fr; border-top:1px solid var(--border); background:var(--surface); }
-.rm-row:nth-child(even) { background:var(--card); }
-.rm-row-label { padding:12px 12px; border-right:1px solid var(--border); background:rgba(255,255,255,0.015); display:flex; flex-direction:column; justify-content:center; min-width:0; }
-.rm-row-cat { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:.14em; color:var(--dim); text-transform:uppercase; margin-bottom:2px; }
-.rm-row-name { font-family:'Syne',sans-serif; font-size:12px; font-weight:700; color:var(--white); }
-.rm-row-sub { font-size:10px; color:var(--muted); margin-top:2px; }
-.rm-cell { padding:11px 13px; border-right:1px solid var(--border); vertical-align:top; min-width:0; overflow:hidden; }
-.rm-cell:last-child { border-right:none; }
-.rm-phase-bar { display:grid; grid-template-columns:190px 1fr 1fr 1fr; background:var(--bg); position:sticky; top:42px; z-index:9; border-bottom:2px solid var(--border2); }
-.rm-phase-blank { border-right:1px solid var(--border); min-width:0; }
-.rm-ph { padding:10px 14px; border-right:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; min-width:0; overflow:hidden; }
-.rm-ph:last-child { border-right:none; }
-.rm-ph-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-.rm-ph-title { font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; word-break:break-word; }
-.rm-ph-sub { font-size:10px; color:var(--muted); }
-.rm-init { margin-bottom:9px; }
-.rm-init:last-child { margin-bottom:0; }
-.rm-init-head { display:flex; align-items:flex-start; gap:6px; margin-bottom:4px; }
-.rm-dot { width:5px; height:5px; border-radius:50%; margin-top:5px; flex-shrink:0; }
-.rm-init-title { font-size:12px; font-weight:600; color:var(--white); line-height:1.3; }
-.rm-init-body { font-size:11px; color:var(--muted); line-height:1.55; padding-left:11px; }
-.rm-tags { display:flex; flex-wrap:wrap; gap:3px; margin-top:4px; padding-left:11px; }
-.rm-tag { font-size:9px; font-weight:700; padding:1px 7px; border-radius:10px; border:1px solid; letter-spacing:.05em; }
-.rt-ski { color:var(--ski); border-color:#E05A2B55; background:#E05A2B14; }
-.rt-arc { color:var(--arc); border-color:#1BAF7A55; background:#1BAF7A12; }
-.rt-yot { color:var(--yot); border-color:#4A88D455; background:#4A88D414; }
-.rt-rob { color:var(--rob); border-color:#E8A02055; background:#E8A02012; }
-.rt-spa { color:var(--spa); border-color:#C18A1555; background:#C18A1512; }
-.rt-ats { color:var(--ats); border-color:#D8404055; background:#D8404014; }
-.rt-tas { color:var(--tas); border-color:#5EA62055; background:#5EA62014; }
-.rm-val-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
-.rm-val { padding:7px 9px; border-radius:5px; background:var(--card); border:1px solid var(--border); }
-.rm-val-name { font-family:'Syne',sans-serif; font-size:10px; font-weight:700; color:var(--white); margin-bottom:3px; }
-.rm-val-desc { font-size:10px; color:var(--muted); line-height:1.5; }
-.rm-culture-cell { padding:11px 13px; border-right:1px solid var(--border); }
-.rm-culture-cell:last-child { border-right:none; }
-@media(max-width:900px){
-  .rm-phase-bar,.rm-section,.rm-row{grid-template-columns:1fr;}
-  .rm-row-label,.rm-cell,.rm-phase-blank,.rm-ph,.rm-section-label,.rm-section-ph,.rm-culture-cell{border-right:none;border-bottom:1px solid var(--border);}
-  .rm-val-grid{grid-template-columns:1fr;}
-  .rm-section-label{border-right:none;}
-}
-</style>
-
-<div class="rm-wrap">
-  <div class="rm-phase-bar">
-    <div class="rm-phase-blank"></div>
-    <div class="rm-ph"><div class="rm-ph-dot" style="background:var(--ski)"></div><div class="rm-ph-title" style="color:var(--ski)">Phase 1 — Foundation Sprint</div><div class="rm-ph-sub">Months 0–3 · Establish, activate, prove</div></div>
-    <div class="rm-ph"><div class="rm-ph-dot" style="background:var(--yot)"></div><div class="rm-ph-title" style="color:var(--yot)">Phase 2 — Platform Build</div><div class="rm-ph-sub">Months 3–12 · Productise, scale, upsell</div></div>
-    <div class="rm-ph"><div class="rm-ph-dot" style="background:var(--arc)"></div><div class="rm-ph-title" style="color:var(--arc)">Phase 3 — Market Leadership</div><div class="rm-ph-sub">Months 12–18 · Lead, partner, compound</div></div>
-  </div>
-
-  <!-- ── SECTION 1: FOUNDATION ── -->
-  <div class="rm-section">
-    <div class="rm-section-label"><div class="rm-section-num">01</div><div class="rm-section-name">Foundation</div><div class="rm-section-desc">Build the capability stack to stay ahead of the AI curve</div></div>
-    <div class="rm-section-ph" style="background:rgba(224,90,43,0.05)"><span class="rm-badge rm-badge-1">Activate what exists</span></div>
-    <div class="rm-section-ph" style="background:rgba(74,136,212,0.05)"><span class="rm-badge rm-badge-2">Productise into platform</span></div>
-    <div class="rm-section-ph" style="background:rgba(27,175,122,0.05)"><span class="rm-badge rm-badge-3">Lead the category</span></div>
-  </div>
-
-  <!-- 1A Products -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">1A</div><div class="rm-row-name">Products</div><div class="rm-row-sub">5 named AI solutions</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Define the Group AI Solutions Portfolio</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-yot">Yottaasys</span><span class="rm-tag rt-spa">SK Spares</span></div>
-        <div class="rm-init-body">3 solutions — Quote-to-Estimate Automation, Production Scheduling Intelligence, Arc.AI Co-Worker + Dashboard Analytics. Each has a defined workflow, measurable outcome, and named pilot client.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Arc.ops Auto-Scheduling POC at ATS India</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span></div>
-        <div class="rm-init-body">Scheduler+ engine scoped with operations team. Arc.ops dashboards live for Planning, Production, QC, Spares, and Management. Baseline metrics documented.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">Arc.source Estimation Intelligence</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-tas">T&AS</span></div>
-        <div class="rm-init-body">OCR-to-BOM pipeline (Gnosys) — drawing → raw material auto-population, component-to-machine mapping. Reduces estimation cycle from days to hours.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">VisionX QC Upsell — Existing Clients</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-yot">Yottaasys</span><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-ats">ATS India</span></div>
-        <div class="rm-init-body">98.7% accuracy, deploys on existing cameras. 90-day paid pilots converting to annual subscriptions. Minimum 5 paying VisionX clients by Month 12.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">CAD Automation Suite — 20% Re-use Target</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-ats">ATS India</span></div>
-        <div class="rm-init-body">Automated component library + similarity-match engine packaged as billable arc.source module. T&AS and ATS CAD depth becomes a recurring product feature.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Physical AI Bundle — Agent-Dispatched AMR</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-rob">SK Robotics</span><span class="rm-tag rt-yot">Yottaasys</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">arc.ops → DFleet → VisionX loop as a named AMR Intelligence Bundle. Agent-dispatched material staging without human instruction on routine moves. First 2 RaaS contracts signed.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 1B Platform -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">1B</div><div class="rm-row-name">Platform</div><div class="rm-row-sub">Group AI spine + governance</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Group AI Governance + Data Spine</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">A unified data and AI governance layer across the group — common identity model, shared connectors into ERP/MES/drawing repositories, AI usage standards, and observability across all entities. Outcome: every AI initiative shares the same secure, auditable foundation.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Subscription Tiers Defined + Priced</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Observe / Operate / Transform. Pricing anchored to measurable ROI — not seat count. Three commercial models: implementation + annual subscription, managed intelligence service, outcome-linked subscription.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">Production-Grade Multi-Tenant Platform</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">Arc.studio as SaaS billing substrate — each client gets a named tenant. Shared workflow orchestration, reusable agents, document knowledge layer, role-based approvals, ERP/MES/WMS/PLM connectors. Minimum 3 paying external clients on subscriptions.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">Arc.net Supply Chain + arc.green ESG</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-spa">SK Spares</span></div>
-        <div class="rm-init-body">SK Spares predictive-maintenance trigger connected to arc.net live supplier visibility. Arc.green IIoT ESG scoring as a named subscription add-on for automotive OEM Scope 3 requirements.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Full Digital Thread — Quote to Service</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-ats">ATS India</span></div>
-        <div class="rm-init-body">Quote → design → schedule → execution → service. Governed agents by function, simulation/optimisation engines, edge-to-enterprise integration, enterprise-grade compliance. 10+ paying tenants, top-5 on multi-year contracts.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Arcstone Open Partner Programme</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">Activate the Arcstone partner programme — bring in ERP consultants and industrial system integrators who serve manufacturing clients but cannot build this full stack. Platform revenue grows without proportional headcount.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 1C Engineering -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">1C</div><div class="rm-row-name">Engineering</div><div class="rm-row-sub">AI-augmented domain depth</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">AI Engineering Team — 3 POCs in 6–8 Weeks</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-yot">Yottaasys</span></div>
-        <div class="rm-init-body">Three POCs: ATS estimation automation, ATS auto-scheduling, T&AS Arc.AI co-worker. Each produces a before/after metric and a reusable demo asset within 8 weeks. IP governance agreement across all 7 entities commissioned.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">AI-Assisted FEA + PLC Docs + CAD Generation</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-tas">T&AS</span></div>
-        <div class="rm-init-body">SKI: AI-assisted FEA — 40% iteration cycle reduction. ATS India: Siemens/Allen Bradley PLC documentation AI-assisted, engineers own sign-off. T&AS: 20% of standard CAD/structural production shifted to AI generation with compliance review.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Industrial AI Centre of Excellence</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Reusable architecture patterns, digital thread, process mining for engineering workflows. ATS AS9100D opens defence/aerospace AI vertical. 5+ Principal SMEs designated — publishing, speaking, anchoring client confidence.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 1D Manufacturing -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">1D</div><div class="rm-row-name">Manufacturing</div><div class="rm-row-sub">ATS lighthouse → client showcase</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">ATS as the Group Lighthouse Plant</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span></div>
-        <div class="rm-init-body">Arc.ops live across all ATS functions. Baseline metrics documented: OEE, scheduling adherence, estimation cycle time, CAD re-use rate. ATS becomes the client walk-through reference by Month 6.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">ATS Reference Site — Metrics Published</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-spa">SK Spares</span></div>
-        <div class="rm-init-body">Schedule adherence improvement measured vs baseline. Predictive maintenance + spares trigger loop live. Case study published with quantified outcomes. ATS hosts client visits.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Wixom DMC Live Demo Environment</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-rob">SK Robotics</span><span class="rm-tag rt-yot">Yottaasys</span></div>
-        <div class="rm-init-body">Full group stack running live — arc.ops → SK Robotics AMR fleet → VisionX quality → Arc.AI co-worker. Client walk-through replaces 40 slides. Target: 4+ client visits hosted by Month 18.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 1E Services -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">1E</div><div class="rm-row-name">Services + SaaS</div><div class="rm-row-sub">Outcomes, not hours</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">T&AS Intelligence Expansion</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Arc.AI co-worker pilot for T&AS drafting teams. Digital marketing as a funded function — dedicated lead, 90-day outbound plan for North America hollow metal, BIM, and construction buyers. Two new service domains scoped.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">T&AS — Expand Beyond Order Processing</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">Grow into BIM + digital handover packages and technical documentation services — higher value, longer engagements. Arc.AI augments output quality and throughput. Revenue diversification with the same skilled team.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">SK Robotics — Subscription Model (RaaS)</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-rob">SK Robotics</span><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">Shift SK Robotics from hardware sale to per-site subscription — AMR fleet, software, and arc.ops integration bundled into a monthly recurring fee. Lower client barrier, higher lifetime value. Aligns with the group's platform subscription model.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── SECTION 2: OPERATIONS ── -->
-  <div class="rm-section">
-    <div class="rm-section-label"><div class="rm-section-num">02</div><div class="rm-section-name">Operations</div><div class="rm-section-desc">Strengthen client value, grow with AI, and win large-margin contracts</div></div>
-    <div class="rm-section-ph" style="background:rgba(224,90,43,0.05)"><span class="rm-badge rm-badge-1">Strengthen client value</span></div>
-    <div class="rm-section-ph" style="background:rgba(74,136,212,0.05)"><span class="rm-badge rm-badge-2">Grow with AI</span></div>
-    <div class="rm-section-ph" style="background:rgba(27,175,122,0.05)"><span class="rm-badge rm-badge-3">Win large-margin contracts</span></div>
-  </div>
-
-  <!-- 2A Retain -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">2A</div><div class="rm-row-name">Strengthen Clients</div><div class="rm-row-sub">Deepen value delivered</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Top-20 Account Retention Programme</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-ats">ATS India</span></div>
-        <div class="rm-init-body">Dedicated account owner per top-20 client. For each: map revenue by entity, identify 90-day AI improvement, schedule executive sponsor review, present one AI-led improvement roadmap. Change conversation from "we deliver labour" to "we improve outcomes."</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">ASSA ABLOY — Intelligence Partner Elevation</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">CEO-level strategic dialogue on agentic order processing, drawing intelligence, and hardware workflow decision support. Reposition from processing wing to Intelligence Wing before a competitor does.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">Predictive Continuity Loop — SPM Clients</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-spa">SK Spares</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Arc.ops Equipment Maintenance → SK Spares predictive order trigger for all existing SPM machine clients. 24hr SLA as a named contract term. Detect → Predict → Source → Deliver in one automated loop.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">Arc.ops Module Depth Activation</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Map all Arcstone clients against 20 arc.ops modules — most use fewer than 6. Structured activation: unlock Scheduler+, Workflow Builder+, OEE bundle. Revenue from depth, not new sales.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Full-Stack Intelligence Partnerships — Top 5</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-yot">Yottaasys</span><span class="rm-tag rt-rob">SK Robotics</span><span class="rm-tag rt-spa">SK Spares</span></div>
-        <div class="rm-init-body">Single contract: arc.ops + Arc.AI + VisionX + SK Robotics AMR + SK Spares SLA. One outcome scorecard. Platform entrenchment makes multi-year renewal structural. These 5 accounts become the flagship case studies.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2B Upsell -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">2B</div><div class="rm-row-name">Grow with AI</div><div class="rm-row-sub">Expand capabilities + value</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Three Cross-Sell Playbooks</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">(1) Engineering client → Estimation + Scheduling + Spares. (2) Manufacturing → arc.ops OEE + VisionX + Predictive Spares. (3) Knowledge-work → Arc.AI + Document Automation + Conversational BI. Each has a documented ROI model and reference case.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">One Account / Many Capabilities Motion</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-tas">T&AS</span></div>
-        <div class="rm-init-body">SKI opens → ATS proves credibility → T&AS scales capacity → Arcstone provides backbone → Yottaasys adds perception → SK Robotics executes → SK Spares locks continuity. Documented plan applied to top-10 growth accounts.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Account Transformation Programmes</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Single department → plant-wide → multi-site → control tower → subscription portfolio. Motion: executive workshop → plant diagnostic → 90-day pilot → phased expansion → subscription conversion.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2C Market Growth -->
-  <div class="rm-row">
-    <div class="rm-row-label"><div class="rm-row-cat">2C</div><div class="rm-row-name">Market Growth</div><div class="rm-row-sub">Big-margin pursuits + GTM</div></div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Formalise GTM — Vertical Pipeline Owners</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span></div>
-        <div class="rm-init-body">Assign pipeline owners: Automotive, Defence/Aerospace, Construction/Civil, Industrial Equipment. Each has a named account list (10+ accounts), 90-day revenue target, and defined entry-point solution. Margin over volume in Year 1.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--ski)"></div><div class="rm-init-title">Strategic Pursuits Office</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">2–3 person function managing bids above $500K: multi-site digitalization, MES + AI control tower, bundled engineering + manufacturing + intelligence contracts. Lead with client pain, not technology features.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">50-Account Target + NMSDC/MSDC Channel</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-tas">T&AS</span></div>
-        <div class="rm-init-body">Tier-1 automotive OEMs, defence primes (AS9100D), North America hollow metal/construction. NMSDC (SKI) + Michigan MSDC (T&AS) diversity certifications open large corporate and government procurement. Two diversity contracts by Month 12.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--yot)"></div><div class="rm-init-title">SKI Group External Brand Launch</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-arc">Arcstone</span></div>
-        <div class="rm-init-body">Single group website, ATS lighthouse case study, 2-page executive brief. Position as the industrial intelligence group combining engineering, software, and autonomous execution in one team.</div>
-      </div>
-    </div>
-    <div class="rm-cell">
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">SEA Market Entry via Arcstone's Network</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-arc">Arcstone</span><span class="rm-tag rt-ski">SKI</span><span class="rm-tag rt-tas">T&AS</span><span class="rm-tag rt-rob">SK Robotics</span></div>
-        <div class="rm-init-body">Arcstone's established presence in Singapore, Indonesia, Vietnam, Malaysia, Thailand. First joint SKI Group proposal targets SEA precision engineering or semiconductor client. One signed engagement by Month 18.</div>
-      </div>
-      <div class="rm-init">
-        <div class="rm-init-head"><div class="rm-dot" style="background:var(--arc)"></div><div class="rm-init-title">Defence + Aerospace Vertical</div></div>
-        <div class="rm-tags"><span class="rm-tag rt-ats">ATS India</span><span class="rm-tag rt-rob">SK Robotics</span><span class="rm-tag rt-tas">T&AS</span></div>
-        <div class="rm-init-body">ATS India's AS9100D aerospace certification and SK Robotics automation capability position the group for defence and aerospace contracts. Dedicated business development resource hired by Month 12.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── SECTION 3: PEOPLE & CULTURE ── -->
-  <div class="rm-section">
-    <div class="rm-section-label"><div class="rm-section-num">03</div><div class="rm-section-name">People &amp; Culture</div><div class="rm-section-desc">Integrity · Ownership · Respect · Curiosity · Customer Centricity</div></div>
-    <div class="rm-section-ph" style="background:rgba(224,90,43,0.05)"><span class="rm-badge rm-badge-1">Establish + own it</span></div>
-    <div class="rm-section-ph" style="background:rgba(74,136,212,0.05)"><span class="rm-badge rm-badge-2">Upskill + align</span></div>
-    <div class="rm-section-ph" style="background:rgba(27,175,122,0.05)"><span class="rm-badge rm-badge-3">Culture as moat</span></div>
-  </div>
-
-  <div class="rm-row" style="align-items:stretch">
-    <div class="rm-row-label"><div class="rm-row-cat">3A</div><div class="rm-row-name">People, Culture + Talent</div><div class="rm-row-sub">All seven entities</div></div>
-    <div class="rm-culture-cell">
-      <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ski);margin-bottom:8px">0–3 Months · Foundations</div>
-      <ul style="padding-left:.85rem;font-size:11.5px;color:var(--muted);line-height:1.85;margin:0">
-        <li>Ownership culture model documented and replicated across all entities — accountability, self-driven, proactive</li>
-        <li>Monthly group leadership cadence + quarterly in-person offsite established</li>
-        <li>AI Champion nominated per entity — accountable for AI literacy and adoption</li>
-        <li>AI awareness programme launched — what AI can and cannot do in each domain</li>
-        <li>University partnerships initiated for engineering talent pipeline (Michigan + Hyderabad)</li>
-      </ul>
-    </div>
-    <div class="rm-culture-cell">
-      <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--yot);margin-bottom:8px">3–12 Months · Upskilling</div>
-      <ul style="padding-left:.85rem;font-size:11.5px;color:var(--muted);line-height:1.85;margin:0">
-        <li>3-tier AI upskilling programme: literacy (all staff) → domain tools (engineers/PMs) → AI strategy (leads)</li>
-        <li>Domain-specific capability building: arc.ops, Arc.AI, VisionX, estimation automation per entity</li>
-        <li>India ↔ US cross-entity rotation — structured knowledge exchange, shared Arc.AI knowledge base</li>
-        <li>Curiosity as a formal performance metric — innovation contribution tracked in reviews</li>
-        <li>Talent pipeline active: internship-to-hire programme with real project assignments</li>
-      </ul>
-    </div>
-    <div class="rm-culture-cell">
-      <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--arc);margin-bottom:8px">12–18 Months · Scale + Authority</div>
-      <ul style="padding-left:.85rem;font-size:11.5px;color:var(--muted);line-height:1.85;margin:0">
-        <li>Principal SME Programme — 8–10 domain experts who publish, speak, and mentor across the group</li>
-        <li>SKI Group Academy launched — external AI certification in AI-Augmented Manufacturing Operations</li>
-        <li>Culture shift measure: teams describe themselves by outcomes and value, not functions</li>
-        <li>Talent pipeline matures: group-wide succession depth visible, cross-entity leaders identified</li>
-      </ul>
-      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border)">
-        <span style="font-size:9px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Values</span>
-        <div style="font-size:11px;margin-top:4px;line-height:1.7">
-          <strong style="color:var(--white)">Integrity</strong> &nbsp;·&nbsp; <strong style="color:var(--white)">Ownership</strong> &nbsp;·&nbsp; <strong style="color:var(--white)">Respect</strong> &nbsp;·&nbsp; <strong style="color:var(--white)">Curiosity</strong> &nbsp;·&nbsp; <strong style="color:var(--white)">Customer Centricity</strong>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- end rm-wrap -->
-
-<div class="banner"><strong>Operationalize AI.</strong> Architect the operating layer. <strong>Institutionalize capability.</strong></div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 5 — Enterprise KPIs & North Star
-══════════════════════════════════════════════════════════ -->
-<div id="slide5" class="slide">
-  <div class="slide-header">
-    <h1>Enterprise Performance Dashboard</h1>
-    <p>Platform · Services · People &amp; Culture — subject to leadership alignment on P&amp;L and legal structure</p>
-  </div>
-
-  <!-- ── THREE PILLAR CARDS ── -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.85rem;margin-bottom:1.25rem">
-
-    <!-- V1 Platform -->
-    <div style="background:var(--surface);border:1px solid #1D4475;border-radius:12px;overflow:hidden">
-      <div style="background:#0A1E38;padding:.8rem 1rem;border-bottom:1px solid #1D4475">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A88D4;margin-bottom:3px">Pillar 1</div>
-        <div style="font-size:1rem;font-weight:700;color:#fff;font-family:'Syne',sans-serif">Platform</div>
-        <div style="font-size:11px;color:#7A90A8;margin-top:2px">Subscription SaaS · AI agents · Recurring revenue</div>
-      </div>
-      <div style="padding:.75rem 1rem">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4A88D4;margin-bottom:.5rem">Entities</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem">
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#E05A2B22;color:#E05A2B;border:1px solid #E05A2B44">SKI</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#1BAF7A22;color:#1BAF7A;border:1px solid #1BAF7A44">Arcstone</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#4A88D422;color:#4A88D4;border:1px solid #4A88D444">Yottaasys</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#E8A02022;color:#E8A020;border:1px solid #E8A02044">SK Robotics</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#C18A1522;color:#C18A15;border:1px solid #C18A1544">SK Spares</span>
-        </div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4A88D4;margin-bottom:.4rem">What it is</div>
-        <ul style="padding-left:.9rem;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:.75rem">
-          <li>arc.ops MES + arc.net supply chain + arc.green ESG + arc.ai agents</li>
-          <li>VisionX perception + SK Robotics AMR physical execution</li>
-          <li>Subscription tiers: Base $3–5K · Growth $6–10K · Premium $10–18K/plant/month</li>
-          <li>arc.studio self-serve — customers build their own micro-agents</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4A88D4;margin-bottom:.4rem">Tools &amp; Platforms</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.25rem">
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">arc.ops</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">arc.net</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">arc.green</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">arc.studio</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">arc.ai</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">VisionX</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">DFleet</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">NavWiz</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">ERP adapters (SAP/Oracle/Epicor)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- V2 Services -->
-    <div style="background:var(--surface);border:1px solid #5C2A0A;border-radius:12px;overflow:hidden">
-      <div style="background:#1E0E04;padding:.8rem 1rem;border-bottom:1px solid #5C2A0A">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#E05A2B;margin-bottom:3px">Pillar 2</div>
-        <div style="font-size:1rem;font-weight:700;color:#fff;font-family:'Syne',sans-serif">Services</div>
-        <div style="font-size:11px;color:#7A90A8;margin-top:2px">Engineering · Manufacturing · Knowledge work · Process</div>
-      </div>
-      <div style="padding:.75rem 1rem">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E05A2B;margin-bottom:.5rem">Entities</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem">
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#E05A2B22;color:#E05A2B;border:1px solid #E05A2B44">SKI</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#D8404022;color:#D84040;border:1px solid #D8404044">ATS India</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#5EA62022;color:#5EA620;border:1px solid #5EA62044">T&AS</span>
-          <span style="font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:#C18A1522;color:#C18A15;border:1px solid #C18A1544">SK Spares</span>
-        </div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E05A2B;margin-bottom:.4rem">What it does</div>
-        <ul style="padding-left:.9rem;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:.75rem">
-          <li>SPM + BIW + FEA + automation + robot simulation for OEMs</li>
-          <li>Contract launch support + buy-off (Nissan, Hirata, Ford, GM)</li>
-          <li>Defence engineering — AS9100D, ballistic range equipment (ATS India)</li>
-          <li>CAD/BIM, GIS/LiDAR, structural, order processing (T&AS)</li>
-          <li>Precision parts, reverse engineering, 24hr CMM fulfilment (SK Spares)</li>
-          <li>Outcome-based + AI-supervised delivery model (shifting from time-billed)</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E05A2B;margin-bottom:.4rem">Tools &amp; Process</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.25rem">
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">AI-assisted FEA</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">AI CAD generation</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">Siemens/Allen Bradley AI</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">LabView/Omron PLC</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">CNC/CMM</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">LiDAR/GIS pipelines</span>
-          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:var(--card);color:var(--muted);border:1px solid var(--border)">AS9100D framework</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- V3 People & Culture -->
-    <div style="background:var(--surface);border:1px solid #2A4A18;border-radius:12px;overflow:hidden">
-      <div style="background:#111E08;padding:.8rem 1rem;border-bottom:1px solid #2A4A18">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#5EA620;margin-bottom:3px">Pillar 3</div>
-        <div style="font-size:1rem;font-weight:700;color:#fff;font-family:'Syne',sans-serif">People &amp; Culture</div>
-        <div style="font-size:11px;color:#7A90A8;margin-top:2px">The binding core that makes the other two verticals trustworthy and durable</div>
-      </div>
-      <div style="padding:.75rem 1rem">
-        <!-- Mindset at center -->
-        <div style="text-align:center;margin-bottom:.75rem;padding:.6rem;background:var(--card);border-radius:8px;border:1px solid #2A4A18">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#5EA620;margin-bottom:4px">Core Binding Value</div>
-          <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:#fff">Mindset</div>
-          <div style="font-size:10px;color:var(--muted);margin-top:2px">How we think shapes everything else. Growth mindset is the prerequisite for all values below.</div>
-        </div>
-        <!-- Values radial display -->
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5EA620;margin-bottom:.45rem">Values</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem;margin-bottom:.75rem">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">🤝 Integrity</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">⚙️ Reliability</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">🎯 Dependability</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">💬 Honesty</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">🌱 Ethics</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">🛡️ Safety &amp; Health</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">✨ Quality</div>
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:600;color:var(--white)">🌍 Sustainability</div>
-          <div style="background:#1A3010;border:1px solid #5EA620;border-radius:6px;padding:.35rem .6rem;font-size:10px;font-weight:700;color:#5EA620;grid-column:1/-1;text-align:center">🔍 Curiosity — the engine of continuous learning and AI adoption</div>
-        </div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5EA620;margin-bottom:.4rem">Upskilling Focus</div>
-        <ul style="padding-left:.9rem;font-size:11px;color:var(--muted);line-height:1.5">
-          <li>AI literacy + confidence across all 7 entities</li>
-          <li>Domain expertise deepening — the skill AI cannot replicate</li>
-          <li>Client leadership + professional judgment</li>
-          <li>Cross-entity rotation — integrated group perspective</li>
-          <li>Wixom DMC as external upskilling hub (revenue stream)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── ENTERPRISE PERFORMANCE DASHBOARD ── -->
-  <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.65rem">Enterprise Performance Dashboard — KPIs</div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-bottom:1.1rem">
-
-    <!-- 1 Revenue Quality -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4A88D4;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#4A88D422;display:inline-flex;align-items:center;justify-content:center;font-size:9px">1</span>Revenue Quality &amp; Growth</div>
-      <ul style="padding-left:.85rem;font-size:11px;color:var(--muted);line-height:1.7;margin:0">
-        <li>Revenue mix: Platform vs Services</li>
-        <li>% Recurring Revenue (MRR growth)</li>
-        <li>Gross margin by vertical</li>
-        <li>Repeat vs New revenue ratio</li>
-      </ul>
-    </div>
-
-    <!-- 2 Customer Value -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E05A2B;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#E05A2B22;display:inline-flex;align-items:center;justify-content:center;font-size:9px">2</span>Customer Value &amp; Retention</div>
-      <ul style="padding-left:.85rem;font-size:11px;color:var(--muted);line-height:1.7;margin:0">
-        <li>Net Revenue Retention (NRR) &gt;110%</li>
-        <li>Customer retention / churn &lt;5%/mo</li>
-        <li>Expansion revenue (upsell to higher tier)</li>
-        <li>% Outcome-based engagements</li>
-      </ul>
-    </div>
-
-    <!-- 3 Operational Scalability -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1BAF7A;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#1BAF7A22;display:inline-flex;align-items:center;justify-content:center;font-size:9px">3</span>Operational Scalability</div>
-      <ul style="padding-left:.85rem;font-size:11px;color:var(--muted);line-height:1.7;margin:0">
-        <li>Revenue per employee</li>
-        <li>Delivery cycle time / turnaround vs baseline</li>
-        <li>Cost per deliverable (T&AS outcome model)</li>
-        <li>% AI-assisted delivery across all entities</li>
-      </ul>
-    </div>
-
-    <!-- 4 Platform Leverage -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#E8A020;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#E8A02022;display:inline-flex;align-items:center;justify-content:center;font-size:9px">4</span>Platform Leverage</div>
-      <ul style="padding-left:.85rem;font-size:11px;color:var(--muted);line-height:1.7;margin:0">
-        <li>% Revenue platform-influenced</li>
-        <li>Active platform customers (target: 100+ by mo 18)</li>
-        <li>Agents per customer (target: 3 by mo 9)</li>
-        <li>Time to onboard &lt;5 days</li>
-      </ul>
-    </div>
-
-    <!-- 5 People Capability -->
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.8rem .9rem">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5EA620;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#5EA62022;display:inline-flex;align-items:center;justify-content:center;font-size:9px">5</span>People Capability</div>
-      <ul style="padding-left:.85rem;font-size:11px;color:var(--muted);line-height:1.7;margin:0">
-        <li>Utilization: billable vs non-billable %</li>
-        <li>Revenue per FTE (target: 25% improvement)</li>
-        <li>% AI-enabled workforce (certified)</li>
-        <li>Attrition — critical roles &lt;10%/yr</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- ── NORTH STAR BANNER ── -->
-  <div style="background:linear-gradient(135deg,#0A1E38 0%,#0E2010 50%,#1A0E04 100%);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;text-align:center">
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem">North Star</div>
-    <div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.3rem">
-      Shift from linear services &rarr; Human-led, AI-Accelerated, Compounding Enterprise
-    </div>
-    <div style="font-size:11px;color:var(--muted)">
-      <strong style="color:#4A88D4">Platform</strong> Enables resusability at scale &nbsp;·&nbsp;
-      <strong style="color:#E05A2B">Services</strong> Builds OEM trust and domain depth &nbsp;·&nbsp;
-      <strong style="color:#5EA620">People &amp; Culture</strong> Ensures quality, trust, and sustainability
-      <br><span style="color:var(--dim);font-size:10px;margin-top:4px;display:block">Together, delivering compounding value</span>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  function showSlide(n, btn) {
-    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.slide-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('slide'+n).classList.add('active');
-    btn.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function showCo(id, tab) {
-    document.querySelectorAll('.company-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.ctab').forEach(t => {
-      t.classList.remove('active');
-      t.style.borderBottomColor = 'transparent';
+    document.getElementById('email-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleNotify();
     });
-    document.getElementById('co-'+id).classList.add('active');
-    tab.classList.add('active');
-    const colors = { ski:'var(--ski)', arc:'var(--arc)', yot:'var(--yot)', rob:'var(--rob)', spa:'var(--spa)', ats:'var(--ats)', tas:'var(--tas)' };
-    tab.style.borderBottomColor = colors[id] || 'var(--white)';
-  }
-</script>
+  </script>
+
 </body>
 </html>
