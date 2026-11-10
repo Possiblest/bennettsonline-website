@@ -1,0 +1,344 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-parkour-movement.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/programmes/movement-and-strength",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-calisthenics.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/programmes/movement-and-strength",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-kids-events.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/birthdays-and-events",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-kaladi.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/kaladi-kuthuvarisai",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-competitive-sports.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/sports-performance-ltad",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-schools.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/schools-and-colleges",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-corporate.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/corporate",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-armed-forces.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/armed-forces-tactical",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-stunts.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/screen-movement",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-coach-cert.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/coach-certification",
+      "statusCode": 301
+    },
+    {
+      "source": "/assets/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/assets/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-parkour-movement.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/programmes/movement-and-strength",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-calisthenics.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/programmes/movement-and-strength",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-kids-events.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/birthdays-and-events",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-kaladi.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/kaladi-kuthuvarisai",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-competitive-sports.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/sports-performance-ltad",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-schools.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/schools-and-colleges",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-corporate.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/corporate",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-armed-forces.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/armed-forces-tactical",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-stunts.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/screen-movement",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-coach-cert.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/more/coach-certification",
+      "statusCode": 301
+    },
+    {
+      "source": "/assets/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/assets/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.chennaiparkour.fit"
+        }
+      ],
+      "destination": "https://vaultmovement.fit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/programmes",
+      "destination": "/more",
+      "statusCode": 301
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(favicon.ico|favicon.svg|apple-touch-icon.png|icon-192.png|icon-512.png)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    }
+  ]
+}

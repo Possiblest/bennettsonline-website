@@ -1,0 +1,27 @@
+# Vault Movement — robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /thank-you
+
+# Search engines and AI answer engines: allowed
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /thank-you
+
+# AI training crawlers: allowed by default (owner decision). To opt out, change Allow: / to Disallow: / below.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+Allow: /
+Disallow: /thank-you
+
+Sitemap: https://vaultmovement.fit/sitemap.xml
