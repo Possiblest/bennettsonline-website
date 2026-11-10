@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vishal Kumar",
+  "jobTitle": "Executive Coach",
+  "worksFor": {
+    "@id": "https://vaultmovement.fit/#organization"
+  },
+  "description": "The technical backbone of our coaching. Known for clean execution, methodical progression and fundamentals that last.",
+  "sameAs": [
+    "https://www.instagram.com/vishal_cpk"
+  ]
+}

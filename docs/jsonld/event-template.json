@@ -1,0 +1,17 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "<Workshop name, e.g. Bharatanatyam workshop>",
+  "startDate": "2026-12-01T07:00:00+05:30",
+  "endDate": "2026-12-01T09:00:00+05:30",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {
+    "@id": "https://vaultmovement.fit/locations/ekkattuthangal#studio"
+  },
+  "organizer": {
+    "@id": "https://vaultmovement.fit/#organization"
+  },
+  "description": "<Exactly what the page says>",
+  "url": "https://vaultmovement.fit/more/<workshop-page>"
+}

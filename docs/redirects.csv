@@ -1,0 +1,15 @@
+old_url,new_url,status,note
+https://www.chennaiparkour.fit/,https://vaultmovement.fit/,301,"Anchors (#about, #programs, #journey, #coaches, #locations, #leadform) cannot be redirected server-side; they land on the home page."
+https://www.chennaiparkour.fit/index.html,https://vaultmovement.fit/,301,
+https://www.chennaiparkour.fit/program-parkour-movement.html,https://vaultmovement.fit/programmes/movement-and-strength,301,
+https://www.chennaiparkour.fit/program-calisthenics.html,https://vaultmovement.fit/programmes/movement-and-strength,301,
+https://www.chennaiparkour.fit/program-kids-events.html,https://vaultmovement.fit/more/birthdays-and-events,301,
+https://www.chennaiparkour.fit/program-kaladi.html,https://vaultmovement.fit/more/kaladi-kuthuvarisai,301,
+https://www.chennaiparkour.fit/program-competitive-sports.html,https://vaultmovement.fit/more/sports-performance-ltad,301,
+https://www.chennaiparkour.fit/program-schools.html,https://vaultmovement.fit/more/schools-and-colleges,301,
+https://www.chennaiparkour.fit/program-corporate.html,https://vaultmovement.fit/more/corporate,301,
+https://www.chennaiparkour.fit/program-armed-forces.html,https://vaultmovement.fit/more/armed-forces-tactical,301,
+https://www.chennaiparkour.fit/program-stunts.html,https://vaultmovement.fit/more/screen-movement,301,
+https://www.chennaiparkour.fit/program-coach-cert.html,https://vaultmovement.fit/more/coach-certification,301,
+https://www.chennaiparkour.fit/assets/*,https://vaultmovement.fit/assets/*,301,Keeps old image links working once the old assets folder is copied over
+https://www.chennaiparkour.fit/* (anything else),https://vaultmovement.fit/,301,Catch-all; keep for at least 12 months

@@ -1,0 +1,1 @@
+These templates mirror the JSON-LD already embedded in every page's <head>. Keep them identical to the visible page text. No Review or AggregateRating markup for our own testimonials. No prices in Service markup.

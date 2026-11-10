@@ -1,0 +1,15 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "<Programme name>",
+  "serviceType": "<Type>",
+  "description": "<Same summary as the page>",
+  "provider": {
+    "@id": "https://vaultmovement.fit/#organization"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Chennai"
+  },
+  "url": "https://vaultmovement.fit/<path>"
+}

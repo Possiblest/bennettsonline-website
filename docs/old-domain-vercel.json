@@ -1,0 +1,70 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "https://vaultmovement.fit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-parkour-movement.html",
+      "destination": "https://vaultmovement.fit/programmes/movement-and-strength",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-calisthenics.html",
+      "destination": "https://vaultmovement.fit/programmes/movement-and-strength",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-kids-events.html",
+      "destination": "https://vaultmovement.fit/more/birthdays-and-events",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-kaladi.html",
+      "destination": "https://vaultmovement.fit/more/kaladi-kuthuvarisai",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-competitive-sports.html",
+      "destination": "https://vaultmovement.fit/more/sports-performance-ltad",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-schools.html",
+      "destination": "https://vaultmovement.fit/more/schools-and-colleges",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-corporate.html",
+      "destination": "https://vaultmovement.fit/more/corporate",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-armed-forces.html",
+      "destination": "https://vaultmovement.fit/more/armed-forces-tactical",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-stunts.html",
+      "destination": "https://vaultmovement.fit/more/screen-movement",
+      "statusCode": 301
+    },
+    {
+      "source": "/program-coach-cert.html",
+      "destination": "https://vaultmovement.fit/more/coach-certification",
+      "statusCode": 301
+    },
+    {
+      "source": "/assets/:path*",
+      "destination": "https://vaultmovement.fit/assets/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://vaultmovement.fit/",
+      "statusCode": 301
+    }
+  ]
+}

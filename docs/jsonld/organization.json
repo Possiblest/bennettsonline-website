@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://vaultmovement.fit/#organization",
+  "name": "Vault Movement",
+  "legalName": "Vault Movement Pvt Ltd",
+  "alternateName": "Chennai Parkour",
+  "foundingDate": "2008",
+  "url": "https://vaultmovement.fit/",
+  "logo": "https://vaultmovement.fit/assets/brand/crest.png",
+  "image": "https://vaultmovement.fit/assets/og/og-default.png",
+  "slogan": "Movement for Everybody",
+  "telephone": "+91-99626-96859",
+  "description": "Vault Movement, formerly Chennai Parkour, is a Fitness & Lifestyle Studio in Chennai, established in 2008. Coach-led strength, movement and lifestyle programmes for adults and kids.",
+  "founder": [
+    {
+      "@type": "Person",
+      "name": "Vignesh Raghavan"
+    },
+    {
+      "@type": "Person",
+      "name": "Vishwa Dayakaran"
+    },
+    {
+      "@type": "Person",
+      "name": "Vishal Kumar"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/chennaiparkour_official",
+    "https://www.instagram.com/chennaiparkour_ecr",
+    "https://www.facebook.com/ChennaiParkour",
+    "https://www.youtube.com/ChennaiParkour"
+  ],
+  "areaServed": {
+    "@type": "City",
+    "name": "Chennai"
+  }
+}

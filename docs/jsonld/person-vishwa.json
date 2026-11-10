@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vishwa Dayakaran",
+  "jobTitle": "Executive Coach",
+  "worksFor": {
+    "@id": "https://vaultmovement.fit/#organization"
+  },
+  "description": "The heartbeat of our community. Brings energy to conditioning and drills, team culture and youth engagement.",
+  "sameAs": [
+    "https://www.instagram.com/vishwa_chennaiparkour"
+  ]
+}
